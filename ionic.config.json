@@ -1,0 +1,7 @@
+{
+  "name": "trapp-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
