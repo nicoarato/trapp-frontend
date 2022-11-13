@@ -1,9 +1,47 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-header [translucent]="true">
+      <ion-toolbar>
+          <ion-title>
+              Registro de árboles
+          </ion-title>
+      </ion-toolbar>
+  </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
 
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-col size="6">
+              <ion-card>
+                        <a href="/arboles">
+                        <ion-card-content>
+                            <img class="logo-on" src="../../assets/icon/logo100.png">
+                        </ion-card-content>
+                      </a>
+                    </ion-card>
+          </ion-col>
+        </ion-row>
+    
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6">
+            <ion-card>
+                      <a href="/arboles">
+                      <ion-card-content>
+                          <img class="logo-off" src="../../assets/icon/logo100.png">
+                      </ion-card-content>
+                  </a>
+                  </ion-card>
+        </ion-col>
+      </ion-row>
+
+   
+    </ion-grid>
 </ion-content>
+  <ion-footer>
+      <ion-toolbar>
+          <ion-title >
+              Trapp v1.0
+          </ion-title>
+      </ion-toolbar>
+  </ion-footer>
+</ion-app>
