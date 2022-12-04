@@ -46,6 +46,8 @@ export class AgregarPage implements OnInit {
 
   async ngOnInit() {
     this.form = this.fb.group({
+      nombre: ['defaultTree',Validators.required],
+      proyecto: [1, Validators.required],
       direccion: ['', [Validators.required]],
       barrio: ['', [Validators.required]],
       manzana: ['', [Validators.required,]],
@@ -68,7 +70,7 @@ export class AgregarPage implements OnInit {
       densidadDeCopa: [''],
       // condiciones de sitio
       espacioDeCrecimiento: [''],
-      platoRadicularOrRaicesExpuestas: [false],
+      platoRadicularORaicesExpuestas: [false],
       // blanco bajo el arbol
       usoBajoElArbol: [false],
       tasaDeUso: [''],
@@ -139,19 +141,7 @@ export class AgregarPage implements OnInit {
   }
 
   async saveData() {
-    // hardcode arbol para mi backend
-      const arbolito = {
-        coordenadas: [-20.00001, -20.11111],
-        direccion: 'Sarasa 123456',
-        name: 'Algarrobo colorado',
-        phone: '111-121212',
-        zip_code: '3080',
-        tree_id: 'AAA019',
-        version: 'test',
-        userId: '62afe66796aea8df2ae17ef1',
-        fecha_inicio_relevamiento: '2022-07-18T01:34:03.087Z',
-        fecha_fin_relevamiento: '2022-07-18T01:34:42.130Z'
-      };
+      const arbolito = this.form.value;
       (await this.arbolesService.addNewTree(arbolito)).subscribe(
         (data) => {
           showLoading({ message: 'Enviando datos...', url: '/home', router: this.router });

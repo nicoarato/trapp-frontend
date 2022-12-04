@@ -42,7 +42,7 @@ export class UiService {
                 message: 'Espere por favor...',
                 translucent: true,
                 backdropDismiss: false,
-                duration: 50000
+                duration: 5000
             });
             this.loading.present();
         } else {

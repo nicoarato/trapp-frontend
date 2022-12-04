@@ -4,30 +4,25 @@ import { StorageService } from './../storage/storage.service';
 import { UserLogin } from './../../interfaces/users.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../../modules/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TreesService {
-  private user: UserLogin;
+  private auth: UserLogin;
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService) { }
 
     async addNewTree(arbol: any) {
-      this.user = await this.storageService.get('user');
-      const options = {
-        headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.user.token}`,
-      })
-    };
-    return this.http.post(API, arbol, options);
+
+    return this.http.post(`${API}arbol`, arbol);
   }
 
   getAllTrees() {
-    return this.http.get(API);
+    return this.http.get(`${API}arbol`);
   }
 
 

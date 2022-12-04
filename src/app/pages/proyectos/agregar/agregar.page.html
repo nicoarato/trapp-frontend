@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>agregar</ion-title>
+    <ion-title>Proyectos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Nuevo Proyecto</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+
+      <form [formGroup]="form" >
+        <div class="bg-gray-300 flex flex-col h-screen">
+          <ion-card class="m-auto">
+              <ion-card-header>
+                <ion-card-title class="p-5 text-3xl text-center">Crear Nuevo Proyecto</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
+                <ion-item fill="outline">
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input type="text" ngModel formControlName="name" placeholder=""></ion-input>
+      <!--            <ion-note slot="error">Usuario inválido</ion-note>-->
+                </ion-item>
+                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="createProject()" type="button">Crear</ion-button>
+              </ion-card-content>
+          </ion-card>
+        </div>
+      </form>
+      
+    </ion-card-content>
+    </ion-card>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Trapp V1.0.0</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -23,12 +23,13 @@ export class LoginComponent implements OnInit {
         return this.form.get('password') as FormControl;
     }
 
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     constructor(
         private authService: AuthService,
         private router: Router,
         private uiService: UiService
     ) {
-        this.authService.logout();
+        // this.authService.logout();
     }
 
     ngOnInit() {}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import {
     HttpInterceptor,
@@ -25,15 +26,15 @@ import { AuthService } from '../auth.service';
     providedIn: 'root'
 })
 export class AuthHttpInterceptor implements AuthHttpInterceptor {
-    constructor(
-        private alertCtrl: AlertController,
-        private authService: AuthService
-    ) {}
-
     private isRefreshing = false;
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
         null
     );
+    constructor(
+        private alertCtrl: AlertController,
+        private authService: AuthService
+    ) { }
+
 
     /**
      * Adds the token to your headers if it exists
