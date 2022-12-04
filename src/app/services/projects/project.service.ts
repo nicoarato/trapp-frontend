@@ -11,18 +11,10 @@ export class ProjectService {
   auth: string;
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
   ) { }
 
-  async addNewProject(project: any) {
-    this.auth = await this.storageService.get('auth.token');
-      const options = {
-        headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.auth}`,
-      })
-    };
-    return this.http.post(`${API}proyecto`, project, options);
+  async addNewProject(proyecto: any) {
+  return this.http.post(`${API}proyecto`, proyecto);
   }
 
   getAllProjects() {

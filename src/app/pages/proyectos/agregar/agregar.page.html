@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Proyectos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -20,10 +23,10 @@
               <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
                 <ion-item fill="outline">
                   <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text" ngModel formControlName="name" placeholder=""></ion-input>
+                  <ion-input (ionChange)="getValue('nombre', $event)" type="text" formControlName="nombre" placeholder="Ingrese un nuevo nombre"></ion-input>
       <!--            <ion-note slot="error">Usuario inválido</ion-note>-->
                 </ion-item>
-                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="createProject()" type="button">Crear</ion-button>
+                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="submit()" type="button">Crear</ion-button>
               </ion-card-content>
           </ion-card>
         </div>
