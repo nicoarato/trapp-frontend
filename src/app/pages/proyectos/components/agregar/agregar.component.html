@@ -14,7 +14,7 @@
     </ion-card-header>
     <ion-card-content>
 
-      <form [formGroup]="form" >
+      <form [formGroup]="form" novalidate>
         <div class="bg-gray-300 flex flex-col h-screen">
           <ion-card class="m-auto">
               <ion-card-header>
@@ -24,7 +24,6 @@
                 <ion-item fill="outline">
                   <ion-label position="floating">Nombre</ion-label>
                   <ion-input (ionChange)="getValue('nombre', $event)" type="text" formControlName="nombre" placeholder="Ingrese un nuevo nombre"></ion-input>
-      <!--            <ion-note slot="error">Usuario inválido</ion-note>-->
                 </ion-item>
                 <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="submit()" type="button">Crear</ion-button>
               </ion-card-content>

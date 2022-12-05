@@ -8,7 +8,7 @@ import { StorageService } from '../storage/storage.service';
   providedIn: 'root'
 })
 export class ProjectService {
-  auth: string;
+
   constructor(
     private http: HttpClient,
   ) { }

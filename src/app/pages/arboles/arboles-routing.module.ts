@@ -16,22 +16,7 @@ const routes: Routes = [
       { path: '**', redirectTo: 'agregar' }
     ]
   },
-  {
-    path: 'agregar',
-    loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
-  },
-  {
-    path: 'listado',
-    loadChildren: () => import('./listado/listado.module').then( m => m.ListadoPageModule)
-  },
-  {
-    path: 'editar',
-    loadChildren: () => import('./editar/editar.module').then( m => m.EditarPageModule)
-  },
-  {
-    path: 'arbol',
-    loadChildren: () => import('./arbol/arbol.module').then( m => m.ArbolPageModule)
-  }
+
 ];
 
 @NgModule({

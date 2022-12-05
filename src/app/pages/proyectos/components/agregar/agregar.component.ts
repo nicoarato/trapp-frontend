@@ -1,18 +1,19 @@
-import showToast from 'src/app/helpers/toast';
-import showLoading from 'src/app/helpers/loading';
-import { StorageService } from './../../../services/storage/storage.service';
-import { ProjectService } from './../../../services/projects/project.service';
-import { Router } from '@angular/router';
-import { UiService } from './../../../modules/utils/ui.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import showToast from 'src/app/helpers/toast';
+import showLoading from 'src/app/helpers/loading';
+import { UiService } from './../../../../modules/utils/ui.service';
+import { ProjectService } from './../../../../services/projects/project.service';
+import { StorageService } from './../../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-agregar',
-  templateUrl: './agregar.page.html',
-  styleUrls: ['./agregar.page.scss'],
+  templateUrl: './agregar.component.html',
+  styleUrls: ['./agregar.component.scss'],
 })
-export class AgregarPage implements OnInit {
+export class AgregarComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     nombre: new FormControl(''),
@@ -37,7 +38,7 @@ constructor(
 
   submit() {
     console.log('valor: ', this.form.value);
-    this.saveData();
+    // this.saveData();
   }
 
   async saveData() {
