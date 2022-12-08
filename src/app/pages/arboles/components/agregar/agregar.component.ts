@@ -1,20 +1,23 @@
+import { transformProjects } from './../../../../services/projects/transform';
 /* eslint-disable @typescript-eslint/naming-convention */
 import showToast from 'src/app/helpers/toast';
 import showLoading from 'src/app/helpers/loading';
-import { TreesService } from './../../../services/trees/trees.service';
-import { StorageService } from './../../../services/storage/storage.service';
-import { User } from './../../../interfaces/users.interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IonSlides } from '@ionic/angular';
+
+import { ProjectService } from 'src/app/services/projects/project.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { TreesService } from 'src/app/services/trees/trees.service';
 
 @Component({
   selector: 'app-agregar',
-  templateUrl: './agregar.page.html',
-  styleUrls: ['./agregar.page.scss'],
+  templateUrl: './agregar.component.html',
+  styleUrls: ['./agregar.component.scss'],
 })
-export class AgregarPage implements OnInit {
+export class AgregarComponent implements OnInit {
   @ViewChild('mySlider', { static: true }) slides: IonSlides;
 
   form: FormGroup;
@@ -31,13 +34,15 @@ export class AgregarPage implements OnInit {
     { id: 'CON_SINTOMAS', value: 'Con síntomas' }
   ];
 
-  user: User;
+  proyectos: any;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private storageService: StorageService,
     private arbolesService: TreesService,
-  ) {}
+    private projectService: ProjectService
+  ) { }
 
   newDate() {
     const date = new Date().toISOString();
@@ -47,7 +52,7 @@ export class AgregarPage implements OnInit {
   async ngOnInit() {
     this.form = this.fb.group({
       nombre: ['defaultTree',Validators.required],
-      proyecto: [1, Validators.required],
+      proyecto: ['', Validators.required],
       direccion: ['', [Validators.required]],
       barrio: ['', [Validators.required]],
       manzana: ['', [Validators.required,]],
@@ -116,24 +121,17 @@ export class AgregarPage implements OnInit {
 
 
     });
-
-    this.user = await this.storageService.get('user');
+    this.projectService.getAllProjects().subscribe((proyectos: any) => {
+      this.proyectos = transformProjects(proyectos);
+      console.log(this.proyectos);
+    });
   }
 
-  getValue(key, { target: { value } }) {
+  getValue(key,{target: { value }} ) {
+    console.log(value);
     this.form.get(key).setValue(value);
   }
 
-  getChecked(key) {
-    const valor = this.form.get(key).value;
-    this.form.get(key).setValue(!valor);
-  }
-
-  getStateSend(): boolean {
-    const values = ['muerto', 'faltante'];
-    const conditions = values.filter(x => this.form.get(x).value);
-    return conditions.length > 0;
-  }
 
   reset() {
     console.log(this.form.value);
@@ -141,17 +139,17 @@ export class AgregarPage implements OnInit {
   }
 
   async saveData() {
-      const arbolito = this.form.value;
-      (await this.arbolesService.addNewTree(arbolito)).subscribe(
-        (data) => {
-          showLoading({ message: 'Enviando datos...', url: '/home', router: this.router });
-          this.storageService.set('arbol', data);
-          showToast({message: `Arbol enviado correctamente`, type: 'success'});
-        },
-        ({ status }) => {
-          showToast({ message: `Ha ocurrido un error- Status: ${status}`, type: 'error'});
-        }
-      );
-  }
+    const arbolito = this.form.value;
+    (await this.arbolesService.addNewTree(arbolito)).subscribe(
+      (data) => {
+        showLoading({ message: 'Enviando datos...', url: '/home', router: this.router });
+        this.storageService.set('arbol', data);
+        showToast({message: `Arbol enviado correctamente`, type: 'success'});
+      },
+      ({ status }) => {
+        showToast({ message: `Ha ocurrido un error- Status: ${status}`, type: 'error'});
+      }
+    );
+}
 
 }

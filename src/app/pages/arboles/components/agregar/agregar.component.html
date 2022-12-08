@@ -16,7 +16,19 @@
           <ion-card-header>
             <ion-label>Ubicación</ion-label>
           </ion-card-header>
+
           <ion-card-content>
+
+              <ion-item >
+                <ion-label position="floating">Asociar al Proyecto</ion-label>
+                <ion-select formControlName="proyecto">
+                  <ion-list *ngIf="proyectos">
+                    <ion-select-option *ngFor="let p of proyectos" [value]="p.id">{{p.nombre}}</ion-select-option>
+                  </ion-list>
+                </ion-select>
+              </ion-item>
+
+            
             <ion-item>
               <ion-label position="floating">Dirección/Sitio</ion-label>
               <ion-input (ionChange)="getValue('direccion', $event)" type="text" formControlName="direccion"></ion-input>
@@ -31,11 +43,11 @@
             </ion-item>
             <ion-item>
               <ion-label>Faltante</ion-label>
-              <ion-toggle (ionChange)="getChecked('faltante')" type="text" formControlName="faltante"></ion-toggle>
+              <ion-toggle type="text" formControlName="faltante"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Muerto</ion-label>
-              <ion-toggle (ionChange)="getChecked('muerto')" type="text" formControlName="muerto"></ion-toggle>
+              <ion-toggle type="text" formControlName="muerto"></ion-toggle>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -55,11 +67,6 @@
             <ion-label>Características</ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-item>
-              <ion-label position="floating">GPS</ion-label>
-              <ion-icon slot="end" name="contract-outline"></ion-icon>
-              <ion-input (ionChange)="getValue('gps', $event)" type="text" formControlName="gps"></ion-input>
-            </ion-item>
             <ion-item>
               <ion-label position="floating">Especie</ion-label>
               <ion-input (ionChange)="getValue('especie', $event)" type="text" formControlName="especie"></ion-input>
@@ -140,7 +147,7 @@
           <ion-card-content>
             <ion-item>
               <ion-label>Exposición al viento dominante</ion-label>
-              <ion-toggle (ionChange)="getChecked('exposicionAlVientoDominante')" type="text" formControlName="exposicionAlVientoDominante"></ion-toggle>
+              <ion-toggle type="text" formControlName="exposicionAlVientoDominante"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Vigor</ion-label>
@@ -156,7 +163,7 @@
             </ion-item>
             <ion-item>
               <ion-label>¿Plato radicular levantado o raíces expuestas?</ion-label>
-              <ion-toggle (ionChange)="getChecked('platoRadicularORaicesExpuestas')" type="text" formControlName="platoRadicularOrRaicesExpuestas"></ion-toggle>
+              <ion-toggle type="text" formControlName="platoRadicularORaicesExpuestas"></ion-toggle>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -182,7 +189,7 @@
           <ion-card-content>
             <ion-item>
               <ion-label>Uso bajo el árbol</ion-label>
-              <ion-toggle (ionChange)="getChecked('usoBajoElArbol')" type="text" formControlName="usoBajoElArbol"></ion-toggle>
+              <ion-toggle type="text" formControlName="usoBajoElArbol"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Tasa de uso</ion-label>
@@ -190,11 +197,11 @@
             </ion-item>
             <ion-item>
               <ion-label>¿Puede moverse el blanco?</ion-label>
-              <ion-toggle (ionChange)="getChecked('movilidadDeBlanco')" type="text" formControlName="movilidadDeBlanco"></ion-toggle>
+              <ion-toggle type="text" formControlName="movilidadDeBlanco"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>¿Puede restringirse el uso?</ion-label>
-              <ion-toggle (ionChange)="getChecked('restriccionDeUso')" type="text" formControlName="restriccionDeUso"></ion-toggle>
+              <ion-toggle type="text" formControlName="restriccionDeUso"></ion-toggle>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -220,19 +227,19 @@
           <ion-card-content>
             <ion-item>
               <ion-label>Cuerpos fructíferos de hongos en cuello?</ion-label>
-              <ion-toggle (ionChange)="getChecked('raicesCuerposFructiferos')" formControlName="raicesCuerposFructiferos"></ion-toggle>
+              <ion-toggle  formControlName="raicesCuerposFructiferos"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Daño menánico a raíces?</ion-label>
-              <ion-toggle (ionChange)="getChecked('raicesDanoMecanico')" formControlName="raicesDanoMecanico"></ion-toggle>
+              <ion-toggle formControlName="raicesDanoMecanico"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Raices estrangulantes</ion-label>
-              <ion-toggle (ionChange)="getChecked('raicesEstrangulantes')" formControlName="raicesEstrangulantes"></ion-toggle>
+              <ion-toggle formControlName="raicesEstrangulantes"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Defectos en reaíces</ion-label>
-              <ion-toggle (ionChange)="getChecked('defectosEnRaices')" formControlName="defectosEnRaices"></ion-toggle>
+              <ion-toggle formControlName="defectosEnRaices"></ion-toggle>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -260,7 +267,7 @@
 
             <ion-item>
               <ion-label>Cancros</ion-label>
-              <ion-select (ionChange)="getValue('troncoCancros', $event)">
+              <ion-select formControlName="troncoCancros">
                 <ion-list>
                   <ion-select-option value="SIN_CANCROS">Sin cancros</ion-select-option>
                   <ion-select-option value="AFECTA_LESS_25">Afecta < 25% </ion-select-option>
@@ -275,7 +282,7 @@
 
             <ion-item>
               <ion-label>Cavidades</ion-label>
-              <ion-select (ionChange)="getValue('troncoCavidades', $event)">
+              <ion-select formControlName="troncoCavidades">
                 <ion-list>
                   <ion-select-option value="SIN_CAVIDADES">Sin cavidades</ion-select-option>
                   <ion-select-option value="AFECTA_LESS_25">Afecta < 25% </ion-select-option>
@@ -306,7 +313,7 @@
 
             <ion-item>
               <ion-label>Horquetas</ion-label>
-              <ion-toggle (ionChange)="getChecked('troncoHorquetas', $event)" formControlName="troncoHorquetas"></ion-toggle>
+              <ion-toggle formControlName="troncoHorquetas"></ion-toggle>
             </ion-item>
 
             <ion-item>
@@ -338,7 +345,7 @@
           <ion-card-content>
             <ion-item>
               <ion-label position="floating">Heridas</ion-label>
-              <ion-select (ionChange)="getValue('troncoHeridas', $event)">
+              <ion-select formControlName="troncoHeridas">
                 <ion-list>
                   <ion-select-option value="SIN_HERIDAS">Sin heridas</ion-select-option>
                   <ion-select-option value="HERIDAS_SELLADAS">Con heridas selladas</ion-select-option>
@@ -350,7 +357,7 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">Inclinación</ion-label>
-              <ion-select (ionChange)="getValue('troncoInclinacion', $event)">
+              <ion-select formControlName="troncoInclinacion">
                 <ion-list>
                   <ion-select-option value="SIN_INCLINACION"> < 10º </ion-select-option>
                   <ion-select-option value="INCLINACION_LEVE"> 10º - 20º</ion-select-option>
@@ -362,7 +369,7 @@
 
             <ion-item>
               <ion-label position="floating">Orificios de taladros de madera o corteza</ion-label>
-              <ion-select (ionChange)="getValue('troncoOrificios', $event)">
+              <ion-select formControlName="troncoOrificios">
                 <ion-list>
                   <ion-select-option value="SIN_LESIONES"> Sin lesiones </ion-select-option>
                   <ion-select-option value="CON_LESIONES_LESS_25"> < 25% </ion-select-option>
@@ -374,7 +381,7 @@
 
             <ion-item>
               <ion-label position="floating">Pudrición de madera</ion-label>
-              <ion-select (ionChange)="getValue('troncoPudricionDeMadera', $event)">
+              <ion-select formControlName="troncoPudricionDeMadera">
                 <ion-list>
                   <ion-select-option value="CON_CUERPOS_FRUCTIFEROS"> Presencia de cuerpos fructíferos </ion-select-option>
                   <ion-select-option value="CON_PUDRICION_T_R_MORE_15"> t/R>15 columna de pudrición cerrada </ion-select-option>
@@ -388,7 +395,7 @@
 
             <ion-item>
               <ion-label position="floating">Rajaduras</ion-label>
-              <ion-select (ionChange)="getValue('troncoRajaduras', $event)">
+              <ion-select formControlName="troncoRajaduras">
                 <ion-list>
                   <ion-select-option value="CON_RAJADURA_MOV_4"> Rajadura con Mov 4 </ion-select-option>
                   <ion-select-option value="CON_RAJADURA_CAVIDAD_PUDRICION_3"> Rajadura con cavidad o pudrición 3 </ion-select-option>
@@ -420,7 +427,7 @@
 
               <ion-item>
                 <ion-label>Cancros</ion-label>
-                <ion-select (ionChange)="getValue('ramasCancros', $event)">
+                <ion-select formControlName="ramasCancros">
                   <ion-list>
                     <ion-select-option value="SIN_CANCROS">Sin cancros</ion-select-option>
                     <ion-select-option value="AFECTA_LESS_25">Afecta < 25% </ion-select-option>
@@ -435,7 +442,7 @@
 
               <ion-item>
                 <ion-label>Cavidades</ion-label>
-                <ion-select (ionChange)="getValue('ramasCavidades', $event)">
+                <ion-select formControlName="ramasCavidades">
                   <ion-list>
                     <ion-select-option value="SIN_CAVIDADES">Sin cavidades</ion-select-option>
                     <ion-select-option value="AFECTA_LESS_25">Afecta < 25% </ion-select-option>
@@ -447,7 +454,7 @@
 
               <ion-item>
                 <ion-label>Ramas colgantes o quebrantes</ion-label>
-                <ion-select (ionChange)="getValue('ramasColgantesQuebrantes', $event)">
+                <ion-select formControlName="ramasColgantesQuebrantes">
                   <ion-list>
                     <ion-select-option value="SIN_RAMAS_COLGANTES"> Sin ramas colgantes </ion-select-option>
                     <ion-select-option value="LESS_10"> < 10% </ion-select-option>
@@ -458,7 +465,7 @@
 
               <ion-item>
                 <ion-label>Ramas muertas</ion-label>
-                <ion-toggle (ionChange)="getChecked('ramasMuertas')" formControlName="ramasMuertas"></ion-toggle>
+                <ion-toggle formControlName="ramasMuertas"></ion-toggle>
               </ion-item>
 
               <ion-item>
@@ -473,7 +480,7 @@
 
               <ion-item>
                 <ion-label position="floating">Interferencia eléctrica </ion-label>
-                  <ion-select (ionChange)="getValue('ramasInterferenciaElectrica', $event)">
+                  <ion-select formControlName="ramasInterferenciaElectrica">
                     <ion-list>
                       <ion-select-option value="SIN_INTERFERENCIA_ELECTRICA"> Sin interferencia </ion-select-option>
                       <ion-select-option value="A_POCA_DISTANCIA"> A 1m de baja Tensión </ion-select-option>

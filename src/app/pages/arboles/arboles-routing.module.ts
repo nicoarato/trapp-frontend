@@ -1,18 +1,16 @@
-import { ArbolPage } from './arbol/arbol.page';
-import { ListadoPage } from './listado/listado.page';
-import { EditarPage } from './editar/editar.page';
-import { AgregarPage } from './agregar/agregar.page';
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+import { ListadoPage } from './listado/listado.page';
+
+import { AgregarComponent } from './components/agregar/agregar.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'agregar', component: AgregarPage },
-      { path: 'editar', component: EditarPage },
+      { path: 'agregar', component: AgregarComponent },
       { path: 'listado', component: ListadoPage },
-      { path: 'arbol', component: ArbolPage },
       { path: '**', redirectTo: 'agregar' }
     ]
   },
