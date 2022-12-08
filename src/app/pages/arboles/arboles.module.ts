@@ -1,18 +1,20 @@
-import { AgregarPage } from './agregar/agregar.page';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ArbolesRoutingModule } from './arboles-routing.module';
 
+import { AgregarComponent } from './components/agregar/agregar.component';
 
 @NgModule({
-  declarations: [AgregarPage],
+  declarations: [AgregarComponent],
   imports: [
+    IonicModule,
     CommonModule,
-    ArbolesRoutingModule
-  ],
-  schemas: [
-    NO_ERRORS_SCHEMA
+    ArbolesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ArbolesModule { }

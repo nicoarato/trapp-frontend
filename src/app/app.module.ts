@@ -1,3 +1,4 @@
+import { AuthModule } from './modules/auth/auth.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AuthModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
