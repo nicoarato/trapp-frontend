@@ -14,10 +14,10 @@ export class ProjectService {
   ) { }
 
   async addNewProject(proyecto: any) {
-  return this.http.post(`${API}proyecto`, proyecto);
+  return this.http.post(`${API}/proyecto`, proyecto);
   }
 
   getAllProjects() {
-    return this.http.get(`${API}proyecto`);
+    return this.http.get(`${API}/proyecto`);
   }
 }
