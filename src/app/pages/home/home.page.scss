@@ -7,7 +7,9 @@ ion-card {
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
-    max-width: fit-content;
+    // max-width: fit-content;
+    width: 150px;
+    height: 150px;
     .logo-off {
         -webkit-filter: grayscale(100%);
         -webkit-filter: grayscale(1);

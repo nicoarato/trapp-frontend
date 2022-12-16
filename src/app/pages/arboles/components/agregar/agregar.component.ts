@@ -1,4 +1,3 @@
-import { transformProjects } from './../../../../services/projects/transform';
 /* eslint-disable @typescript-eslint/naming-convention */
 import showToast from 'src/app/helpers/toast';
 import showLoading from 'src/app/helpers/loading';
@@ -12,6 +11,7 @@ import { ProjectService } from 'src/app/services/projects/project.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { TreesService } from 'src/app/services/trees/trees.service';
 
+import { transformProjects } from './../../../../services/projects/transform';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
@@ -51,13 +51,13 @@ export class AgregarComponent implements OnInit {
 
   async ngOnInit() {
     this.form = this.fb.group({
-      nombre: ['defaultTree',Validators.required],
+      nombre: ['',Validators.required],
       proyecto: ['', Validators.required],
-      direccion: ['', [Validators.required]],
-      barrio: ['', [Validators.required]],
-      manzana: ['', [Validators.required,]],
-      faltante: [false, [Validators.required,]],
-      muerto: [false, [Validators.required,]],
+      direccion: ['', [Validators.required, Validators.minLength(6)]],
+      barrio: ['', [Validators.required, Validators.minLength(3)]],
+      manzana: ['', [Validators.required]],
+      faltante: [false],
+      muerto: [false],
       createdAt: [this.newDate()],
       latitud: [''],
       longitud: [''],
@@ -98,6 +98,7 @@ export class AgregarComponent implements OnInit {
       coeficienteDeEsbeltez: [''],
       conCortezaIncluida: [''],
       conDefectosAdicionales: [''],
+
       troncoOrificios: [''],
       troncoFustesMultiples: [''],
       troncoHeridas: [''],
@@ -123,15 +124,12 @@ export class AgregarComponent implements OnInit {
     });
     this.projectService.getAllProjects().subscribe((proyectos: any) => {
       this.proyectos = transformProjects(proyectos);
-      console.log(this.proyectos);
     });
   }
 
   getValue(key,{target: { value }} ) {
-    console.log(value);
     this.form.get(key).setValue(value);
   }
-
 
   reset() {
     console.log(this.form.value);
@@ -150,6 +148,6 @@ export class AgregarComponent implements OnInit {
         showToast({ message: `Ha ocurrido un error- Status: ${status}`, type: 'error'});
       }
     );
-}
+  }
 
 }

@@ -42,6 +42,10 @@
               <ion-input (ionChange)="getValue('manzana', $event)" type="text" formControlName="manzana"></ion-input>
             </ion-item>
             <ion-item>
+              <ion-label position="floating">Nombre asignado al árbol</ion-label>
+              <ion-input (ionChange)="getValue('nombre', $event)" type="text" formControlName="nombre" placeholder="Ej: ABCDE1234"></ion-input>
+            </ion-item>
+            <ion-item>
               <ion-label>Faltante</ion-label>
               <ion-toggle type="text" formControlName="faltante"></ion-toggle>
             </ion-item>
@@ -52,11 +56,14 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-button fill="clear" (click)="mySlider.slideNext()">
+        <ion-button *ngIf="!form.controls.muerto.value && !form.controls.faltante.value" fill="clear" (click)="mySlider.slideNext()">
           Siguiente
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </ion-button>
        
+        <ion-button *ngIf="form.controls.muerto.value || form.controls.faltante.value" expand="block" (click)="reset()" [disabled]="form.invalid">
+          Enviar
+        </ion-button>
       </form>
     </ion-slide>
 
@@ -496,7 +503,7 @@
           <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
           Anterior
         </ion-button>
-        <ion-button expand="block" (click)="reset()">
+        <ion-button expand="block" (click)="reset()" [disabled]="form.invalid">
           Enviar
         </ion-button>
       </form>
