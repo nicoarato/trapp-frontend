@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProyectoPage } from './../proyectos/proyecto/proyecto.page';
-import { EditarPage } from './../proyectos/editar/editar.page';
 
 import { AgregarComponent } from './components/agregar/agregar.component';
 import { ListadoComponent } from './components/listado/listado.component';
+import { ProyectoComponent } from './components/proyecto/proyecto.component';
 
 const routes: Routes = [
   {
@@ -13,9 +12,8 @@ const routes: Routes = [
     children: [
       { path: 'agregar', component: AgregarComponent },
       { path: 'listado', component: ListadoComponent },
-      { path: 'editar', component: EditarPage },
-      { path: 'proyecto', component: ProyectoPage },
-      { path: '**', redirectTo: 'agregar' }
+      { path: 'proyecto', component: ProyectoComponent },
+      { path: '**', redirectTo: 'listado' }
     ]
   },
 ];

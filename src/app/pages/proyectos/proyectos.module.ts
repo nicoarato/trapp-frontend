@@ -7,9 +7,10 @@ import { ProyectosRoutingModule } from './proyectos-routing.module';
 
 import { AgregarComponent } from './components/agregar/agregar.component';
 import { ListadoComponent } from './components/listado/listado.component';
+import { ProyectoComponent } from './components/proyecto/proyecto.component';
 
 @NgModule({
-  declarations: [ListadoComponent, AgregarComponent],
+  declarations: [ListadoComponent, AgregarComponent, ProyectoComponent],
   imports: [
     IonicModule,
     CommonModule,
