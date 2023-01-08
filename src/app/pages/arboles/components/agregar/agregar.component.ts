@@ -12,6 +12,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 import { TreesService } from 'src/app/services/trees/trees.service';
 
 import { transformProjects } from './../../../../services/projects/transform';
+
+import { Geolocation } from '@capacitor/geolocation';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
@@ -149,5 +151,11 @@ export class AgregarComponent implements OnInit {
       }
     );
   }
+
+  async getCoordinates() {
+    const {coords: {latitude, longitude}} = await Geolocation.getCurrentPosition();
+    this.form.get('latitud').setValue(latitude);
+    this.form.get('longitud').setValue(longitude);
+   }
 
 }
