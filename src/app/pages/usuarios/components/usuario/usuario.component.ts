@@ -1,5 +1,6 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-usuario',
@@ -33,10 +34,15 @@ export class UsuarioComponent implements OnInit {
     password: 'holamundo',
   };
 
-  constructor() { }
+  data: any;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
       this.cargarDatos(this.usuario);
+      // this.data = this.userService.getUser(1);
+      // console.log(this.data.result);
+
     }
 
   setValue(key,value) {
@@ -45,7 +51,6 @@ export class UsuarioComponent implements OnInit {
 
   cargarDatos(datos) {
     Object.keys(datos).map(x => {
-      console.log(datos[x])
       this.setValue(x, datos[x]);
     });
   }

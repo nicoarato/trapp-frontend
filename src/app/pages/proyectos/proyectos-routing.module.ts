@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'agregar', component: AgregarComponent },
       { path: 'listado', component: ListadoComponent },
-      { path: 'proyecto', component: ProyectoComponent },
+      { path: 'detalle/:id', component: ProyectoComponent },
       { path: '**', redirectTo: 'listado' }
     ]
   },

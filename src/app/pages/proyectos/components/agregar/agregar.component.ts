@@ -33,11 +33,11 @@ constructor(
   }
 
   submit() {
-    // this.saveData();
     const keys = Object.keys(this.form.value);
     keys.map(k => { if (typeof this.form.value[k] === 'string') {
       this.form.value[k] = this.form.value[k].toUpperCase();
     }});
+    this.saveData();
   }
 
   async saveData() {

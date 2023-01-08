@@ -12,10 +12,14 @@ export class UserService {
   ) { }
 
   async addNewUser(usuario: any) {
-    return this.http.post(`${API}/usuarios`, usuario);
+    return this.http.post(`${API}/user`, usuario);
   }
 
   getAllUsers() {
-    return this.http.get(`${API}/usuarios`);
+    return this.http.get(`${API}/user`);
+  }
+
+  getUser(id: number) {
+    return this.http.get(`${API}/user/${id}`);
   }
 }

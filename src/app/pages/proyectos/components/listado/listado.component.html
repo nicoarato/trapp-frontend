@@ -10,8 +10,8 @@
 <ion-content>
   <ion-searchbar [debounce]="400" placeholder="Buscar proyecto" (ionChange)="handleSearch($event)"></ion-searchbar>
   <ion-list *ngIf="listado">
-    <ion-item *ngFor="let proyecto of listado.result">
-      <a href="/proyectos/proyecto" >
+    <ion-item *ngFor="let proyecto of proyectos">
+      <a href="/proyectos/detalle/{{proyecto.id}}" >
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{proyecto.nombre | uppercase }}</ion-card-title>
