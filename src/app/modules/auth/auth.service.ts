@@ -50,6 +50,12 @@ export class AuthService {
         this.storage.set('auth.user', userinfo.user);
     }
 
+    isAdmin() {
+        return from(this.storage.get('auth.user')).pipe(
+            map((user: User) => user.rol.id === 1)
+        );
+    }
+
     isLogged() {
         return from(this.storage.get('auth.token')).pipe(
             map((value) => !!value)

@@ -3,20 +3,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ProyectosRoutingModule } from './proyectos-routing.module';
+import { UsuariosRoutingModule } from './usuarios-routing.module';
 
 import { AgregarComponent } from './components/agregar/agregar.component';
 import { ListadoComponent } from './components/listado/listado.component';
-import { ProyectoComponent } from './components/proyecto/proyecto.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+
 
 @NgModule({
-  declarations: [ListadoComponent, AgregarComponent, ProyectoComponent],
+  declarations: [AgregarComponent, ListadoComponent, UsuarioComponent],
   imports: [
     IonicModule,
     CommonModule,
-    ProyectosRoutingModule,
+    UsuariosRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ]
 })
-export class ProyectosModule { }
+export class UsuariosModule { }

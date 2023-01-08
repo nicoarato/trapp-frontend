@@ -16,7 +16,10 @@ import { StorageService } from './../../../../services/storage/storage.service';
 export class AgregarComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    nombre: new FormControl(''),
+    nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    localidad: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    provincia: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    tiempoEstimado: new FormControl('', [Validators.required, Validators.min(0)]),
 });
 
 constructor(
@@ -26,19 +29,15 @@ constructor(
   private storageService: StorageService
   ) { }
 
-  get nombre(): FormControl {
-    return this.form.get('nombre') as FormControl;
-  }
-
-  getValue(key, { target: { value } }) {
-    this.form.get(key).setValue(value);
-  }
   ngOnInit() {
   }
 
   submit() {
-    console.log('valor: ', this.form.value);
-    // this.saveData();
+    const keys = Object.keys(this.form.value);
+    keys.map(k => { if (typeof this.form.value[k] === 'string') {
+      this.form.value[k] = this.form.value[k].toUpperCase();
+    }});
+    this.saveData();
   }
 
   async saveData() {
@@ -54,27 +53,5 @@ constructor(
         }
       );
   }
-
-  createProject() {
-    // if (this.form.valid) {
-    //     this.uiService.cargando(true);
-    //     this.authService
-    //         .login(this.form.value.username, this.form.value.password)
-    //         .subscribe(
-    //             (value) => {
-    //                 this.uiService.cargando(false).then(() => {
-                        this.router.navigateByUrl('/arboles/agregar');
-    //                 });
-    //             },
-    //             (error) => {
-    //                 this.uiService.cargando(false);
-    //                 this.uiService.alerta(
-    //                     'Credenciales incorrectas.',
-    //                     'Error'
-    //                 );
-    //             }
-    //         );
-    // }
-}
 
 }

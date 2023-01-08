@@ -1,14 +1,40 @@
-<ion-list *ngIf="listado">
-  <ion-item *ngFor="let proyecto of listado.result">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{proyecto.nombre | uppercase }}</ion-card-title>
-        <ion-card-subtitle>Creado: {{proyecto.createdAt | date }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Código de proyecto: {{proyecto.id}}</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
-</ion-list>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Proyectos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
+  <ion-searchbar [debounce]="400" placeholder="Buscar proyecto" (ionChange)="handleSearch($event)"></ion-searchbar>
+  <ion-list *ngIf="listado">
+    <ion-item *ngFor="let proyecto of proyectos">
+      <a href="/proyectos/detalle/{{proyecto.id}}" >
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{proyecto.nombre | uppercase }}</ion-card-title>
+            <ion-card-subtitle>Creado: {{proyecto.createdAt | date }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Código de proyecto: {{proyecto.id}}</p>
+          </ion-card-content>
+        </ion-card>
+      </a>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <a href="/proyectos/agregar">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </a>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Trapp V1.0.0</ion-title>
+  </ion-toolbar>
+</ion-footer>

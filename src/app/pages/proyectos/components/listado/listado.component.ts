@@ -9,12 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class ListadoComponent implements OnInit {
 
   listado: any;
+  proyectos: any[];
   constructor(private proyectoService: ProjectService) { }
 
   ngOnInit() {
    this.proyectoService.getAllProjects().subscribe(( data )=> {
     this.listado = data;
+    this.proyectos = this.listado.result;
    });
+  }
+
+  handleSearch({target: { value }}) {
+    this.proyectos = this.listado.result.filter(({nombre}) =>
+    nombre.toLowerCase().includes(value.toLowerCase()));
   }
 
 }
