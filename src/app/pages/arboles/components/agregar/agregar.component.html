@@ -28,6 +28,11 @@
                 </ion-select>
               </ion-item>
 
+              <ion-item>
+                <ion-label position="floating">Nombre asignado al árbol</ion-label>
+                <ion-input (ionChange)="getValue('nombre', $event)" type="text" formControlName="nombre" placeholder="Ej: ABCDE1234"></ion-input>
+              </ion-item>
+
             
             <ion-item>
               <ion-label position="floating">Dirección/Sitio</ion-label>
@@ -41,10 +46,38 @@
               <ion-label position="floating">Manzana</ion-label>
               <ion-input (ionChange)="getValue('manzana', $event)" type="text" formControlName="manzana"></ion-input>
             </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button *ngIf="!form.controls.muerto.value && !form.controls.faltante.value" fill="clear" (click)="mySlider.slideNext()">
+          Siguiente
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+       
+      </form>
+    </ion-slide>
+
+    <ion-slide>
+      <form [formGroup]="form" (ngSubmit)="saveData()" novalidate>
+        <ion-card>
+          <ion-card-header>
+            <ion-label>Ubicación</ion-label>
+          </ion-card-header>
+
+          <ion-card-content>
+
             <ion-item>
-              <ion-label position="floating">Nombre asignado al árbol</ion-label>
-              <ion-input (ionChange)="getValue('nombre', $event)" type="text" formControlName="nombre" placeholder="Ej: ABCDE1234"></ion-input>
+              <ion-label position="floating">Latitud </ion-label>
+              <ion-icon slot="end" name="locate-outline" (click)="getCoordinates()"></ion-icon>
+              <ion-input (ionChange)="getValue('latitud', $event)" type="text" formControlName="latitud"></ion-input>
             </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Longitud</ion-label>
+              <ion-input (ionChange)="getValue('longitud', $event)" type="text" formControlName="longitud"></ion-input>
+            </ion-item>
+
             <ion-item>
               <ion-label>Faltante</ion-label>
               <ion-toggle type="text" formControlName="faltante"></ion-toggle>
@@ -55,7 +88,10 @@
             </ion-item>
           </ion-card-content>
         </ion-card>
-
+        <ion-button fill="clear" (click)="mySlider.slidePrev()">
+          <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+          Anterior
+        </ion-button>
         <ion-button *ngIf="!form.controls.muerto.value && !form.controls.faltante.value" fill="clear" (click)="mySlider.slideNext()">
           Siguiente
           <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -74,6 +110,7 @@
             <ion-label>Características</ion-label>
           </ion-card-header>
           <ion-card-content>
+
             <ion-item>
               <ion-label position="floating">Especie</ion-label>
               <ion-input (ionChange)="getValue('especie', $event)" type="text" formControlName="especie"></ion-input>
