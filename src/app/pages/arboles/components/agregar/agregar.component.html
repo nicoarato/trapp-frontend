@@ -1,11 +1,5 @@
-<ion-header>
-  <ion-toolbar mode="md" color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-      <ion-title> Nuevo Arbol</ion-title>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header-options [title]="'Nuevo Arbol'" [href]="'home'"></app-header-options>
+
 <ion-content class="formulario-slide">
   
   <ion-slides pager="true" [options]="slideOpts" #mySlider>

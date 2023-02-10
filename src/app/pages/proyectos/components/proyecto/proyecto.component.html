@@ -1,14 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Información de Proyecto</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/proyectos"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header-options [title]="'Información de Proyecto'" [href]="'/proyectos'"></app-header-options>
 
 <ion-content>
-  <ion-card>
+  <ion-card >
     <ion-card-header>
       <ion-label>Datos de Proyecto</ion-label>
     </ion-card-header>
@@ -20,7 +13,6 @@
 
       <ion-card>
         <ion-card-header>
-          <!-- <ion-card-title>NOMBRE</ion-card-title> -->
           <ion-card-subtitle>Creado: {{date}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
@@ -29,10 +21,9 @@
       </ion-card>
 
       <form [formGroup]="form" novalidate>
-        <div class="bg-gray-300 flex flex-col h-screen">
           <ion-card class="m-auto">
               <ion-card-header>
-                <ion-card-title class="p-5 text-3xl text-center">Detalle de proyecto</ion-card-title>
+                <ion-card-title class="p-5 text-xl text-center">Detalle de proyecto</ion-card-title>
               </ion-card-header>
               <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
                 <ion-item fill="outline">
@@ -53,17 +44,13 @@
                 </ion-item>                
                 
                 <ion-button expand="block" size="medium" [disabled]="(form.invalid && checkedForm)" (click)="actualizar()" type="button">Guardar cambios</ion-button>
+                <ion-button *ngIf="!checkedForm" expand="block" size="medium" [disabled]="(form.invalid && checkedForm)" type="button" color="danger">Eliminar proyecto</ion-button>
               </ion-card-content>
           </ion-card>
-        </div>
-      </form>
+        </form>
       
     </ion-card-content>
     </ion-card>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Trapp V1.0.0</ion-title>
-  </ion-toolbar>
-</ion-footer>
+<app-footer></app-footer>

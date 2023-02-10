@@ -5,10 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ArbolesRoutingModule } from './arboles-routing.module';
 
+import { HeaderOptionsComponent } from './../../components/header-options/header-options.component';
+
 import { AgregarComponent } from './components/agregar/agregar.component';
 
 @NgModule({
-  declarations: [AgregarComponent],
+  declarations: [AgregarComponent, HeaderOptionsComponent],
   imports: [
     IonicModule,
     CommonModule,

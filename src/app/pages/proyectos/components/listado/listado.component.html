@@ -1,26 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mis Proyectos</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header-options [title]="'Mis Proyectos'" [href]="'home'"></app-header-options>
 
 <ion-content>
   <ion-searchbar [debounce]="400" placeholder="Buscar proyecto" (ionChange)="handleSearch($event)"></ion-searchbar>
   <ion-list *ngIf="listado">
-    <ion-item *ngFor="let proyecto of proyectos">
+    <ion-item *ngFor="let proyecto of proyectos" class="container-wrapper">
       <a href="/proyectos/detalle/{{proyecto.id}}" >
         <ion-card>
           <ion-card-header>
-            <ion-card-title>{{proyecto.nombre | uppercase }}</ion-card-title>
+            <ion-card-title class="text-base" >{{proyecto.nombre | uppercase }}</ion-card-title>
             <ion-card-subtitle>Creado: {{proyecto.createdAt | date }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <p>Código de proyecto: {{proyecto.id}}</p>
           </ion-card-content>
         </ion-card>
+      </a>
+      <a slot="end" href="proyectos/detalle/{{proyecto.id}}/arboles">
+        <ion-button > Ver</ion-button>
       </a>
     </ion-item>
   </ion-list>

@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'agregar', component: AgregarComponent },
       { path: 'listado', component: ListadoComponent },
       { path: 'detalle/:id', component: ProyectoComponent },
+      { path: 'detalle/:id/arboles', component: ProyectoComponent },
       { path: '**', redirectTo: 'listado' }
     ]
   },

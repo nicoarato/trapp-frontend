@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Usuarios</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/usuarios"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header-options [title]="'Usuarios'" [href]="'/usuarios'"></app-header-options>
 
 <ion-content>
   <ion-card>
@@ -13,9 +6,7 @@
       <ion-label>Nuevo Usuario</ion-label>
     </ion-card-header>
     <ion-card-content>
-
       <form [formGroup]="form" novalidate>
-        <div class="bg-gray-300 flex flex-col h-screen">
           <ion-card class="m-auto">
               <ion-card-header>
                 <ion-card-title class="p-5 text-3xl text-center">Registrar Nuevo Usuario</ion-card-title>
@@ -35,32 +26,31 @@
                 </ion-item>
                 <ion-item fill="outline">
                   <ion-label position="floating">Domicilio</ion-label>
-                  <ion-input type="text" formControlName="domicilio" placeholder="Ingrese cantidad en horas"></ion-input>
+                  <ion-input type="text" formControlName="domicilio"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
                   <ion-label position="floating">Localidad</ion-label>
-                  <ion-input type="text" formControlName="localidad" placeholder="Ingrese cantidad en horas"></ion-input>
+                  <ion-input type="text" formControlName="localidad"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
                   <ion-label position="floating">Provincia</ion-label>
-                  <ion-input type="text" formControlName="provincia" placeholder="Ingrese cantidad en horas"></ion-input>
+                  <ion-input type="text" formControlName="provincia"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
                   <ion-label position="floating">Nombre de usuario</ion-label>
-                  <ion-input type="text" formControlName="nombreUsuario" placeholder="Ingrese cantidad en horas"></ion-input>
+                  <ion-input type="text" formControlName="nombreUsuario"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
                   <ion-label position="floating">Contraseña</ion-label>
-                  <ion-input type="password"  formControlName="password" placeholder="Ingrese cantidad en horas"></ion-input>
+                  <ion-input type="password"  formControlName="password"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
                   <ion-label position="floating">Contraseña</ion-label>
-                  <ion-input type="password" formControlName="password2" placeholder="Ingrese cantidad en horas"></ion-input>
+                  <ion-input type="password" formControlName="password2"></ion-input>
                 </ion-item>
                 <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="submit()" type="button">Registrar</ion-button>
               </ion-card-content>
           </ion-card>
-        </div>
       </form>
       
     </ion-card-content>
@@ -71,8 +61,4 @@
 
 
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Trapp V1.0.0</ion-title>
-  </ion-toolbar>
-</ion-footer>
+<app-footer></app-footer>

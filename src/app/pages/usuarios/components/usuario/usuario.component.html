@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Detalle de usuario</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/usuarios"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header-options [title]="'Detalle de usuario'" [href]="'/usuarios'"></app-header-options>
 
 <ion-content>
   <ion-card>
@@ -18,7 +11,6 @@
         <ion-toggle type="text" (ionChange)="handleChange()"></ion-toggle>
       </ion-item>
       <form [formGroup]="form" novalidate>
-        <div class="bg-gray-300 flex flex-col h-screen">
           <ion-card class="m-auto">
               <ion-card-header>
                 <ion-card-title class="p-5 text-3xl text-center">Registrar Nuevo Usuario</ion-card-title>
@@ -57,17 +49,13 @@
                   <ion-input type="password" formControlName="password" placeholder="Ingrese cantidad en horas" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-button expand="block" size="medium" [disabled]="(form.invalid && checkedForm)" (click)="guardar()" type="button">Guardar cambios</ion-button>
+                <ion-button expand="block" size="medium" [disabled]="(checkedForm)" type="button" color="danger">Eliminar usuario</ion-button>
               </ion-card-content>
           </ion-card>
-        </div>
       </form>
       
     </ion-card-content>
     </ion-card>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Trapp V1.0.0</ion-title>
-  </ion-toolbar>
-</ion-footer>
+<app-footer></app-footer>
