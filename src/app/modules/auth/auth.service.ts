@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from '../../services/storage/storage.service';
+import { StorageService } from 'src/app/modules/utils/storage.service';
 import { from, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';

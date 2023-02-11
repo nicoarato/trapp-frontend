@@ -1,0 +1,42 @@
+<app-header-options [title]="'Proyectos'" [href]="'/proyectos'"></app-header-options>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Nuevo Proyecto</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+
+      <form [formGroup]="form" novalidate>
+          <ion-card class="m-auto">
+              <ion-card-header>
+                <ion-card-title class="p-5 text-3xl text-center">Crear Nuevo Proyecto</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
+                <ion-item fill="outline">
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input type="text" formControlName="nombre" placeholder="Ingrese un nuevo nombre"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Localidad</ion-label>
+                  <ion-input type="text" formControlName="localidad"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Provincia</ion-label>
+                  <ion-input type="text" formControlName="provincia"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Tiempo estimado de relevamiento</ion-label>
+                  <ion-input type="number" formControlName="tiempoEstimado" placeholder="Ingrese cantidad en horas"></ion-input>
+                </ion-item>
+                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="submit()" type="button">Crear</ion-button>
+              </ion-card-content>
+          </ion-card>
+      </form>
+      
+    </ion-card-content>
+    </ion-card>
+
+</ion-content>
+
+<app-footer></app-footer>

@@ -1,0 +1,64 @@
+<app-header-options [title]="'Usuarios'" [href]="'/usuarios'"></app-header-options>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Nuevo Usuario</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" novalidate>
+          <ion-card class="m-auto">
+              <ion-card-header>
+                <ion-card-title class="p-5 text-3xl text-center">Registrar Nuevo Usuario</ion-card-title>
+              </ion-card-header>
+              <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
+                <ion-item fill="outline">
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input type="text" formControlName="nombre"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Apellido</ion-label>
+                  <ion-input type="text" formControlName="apellido"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Documento de identidad</ion-label>
+                  <ion-input type="text" formControlName="documento"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Domicilio</ion-label>
+                  <ion-input type="text" formControlName="domicilio"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Localidad</ion-label>
+                  <ion-input type="text" formControlName="localidad"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Provincia</ion-label>
+                  <ion-input type="text" formControlName="provincia"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Nombre de usuario</ion-label>
+                  <ion-input type="text" formControlName="nombreUsuario"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-input type="password"  formControlName="password"></ion-input>
+                </ion-item>
+                <ion-item fill="outline">
+                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-input type="password" formControlName="password2"></ion-input>
+                </ion-item>
+                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="submit()" type="button">Registrar</ion-button>
+              </ion-card-content>
+          </ion-card>
+      </form>
+      
+    </ion-card-content>
+    </ion-card>
+
+</ion-content>
+
+
+
+
+<app-footer></app-footer>

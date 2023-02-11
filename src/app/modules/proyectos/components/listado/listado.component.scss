@@ -1,0 +1,10 @@
+.container-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    ion-card{
+        width: 100%;
+    }
+    a {
+        text-decoration: none;
+    }
+}

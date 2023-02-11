@@ -1,0 +1,23 @@
+ion-content {
+    background-color: red;
+}
+
+ion-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    // max-width: fit-content;
+    width: 150px;
+    height: 150px;
+    .logo-off {
+        -webkit-filter: grayscale(100%);
+        -webkit-filter: grayscale(1);
+        filter: grayscale(100%);
+        filter: gray;
+    }
+    &.md{
+        width: inherit;
+    }
+
+}
