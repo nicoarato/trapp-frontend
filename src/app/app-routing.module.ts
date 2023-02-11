@@ -11,7 +11,7 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () =>
-            import('./pages/index.module').then((m) => m.IndexModule),
+            import('./modules/index.module').then((m) => m.IndexModule),
         canLoad: [AuthGuard]
     },
     {
