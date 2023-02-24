@@ -1,7 +1,10 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProjectService } from '../../projecto.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+
+import { ProjectService } from '../../projecto.service';
+import { UiService } from './../../../utils/ui.service';
 
 interface Proyecto {
   id: number;
@@ -37,7 +40,10 @@ export class ProyectoComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private alertController: AlertController,
+    private uiService: UiService,
+    private router: Router,
     ) {
       this.activatedRoute.params.subscribe(params => {
         this.projectService.getProject(params.id).subscribe(({result}) => {
@@ -60,7 +66,7 @@ export class ProyectoComponent implements OnInit {
 
   actualizar() {
     const datos = this.form.value;
-    this.projectService.updateProject(datos);
+    this.projectService.update(datos);
   }
 
   cargarDatos(datos) {
@@ -77,6 +83,36 @@ export class ProyectoComponent implements OnInit {
     this.codigoProyecto = datos.id;
     this.date = new Date(datos.createdAt).toLocaleString();
     this.setValue('createdAt', new Date(datos.createdAt));
+  }
+
+  eliminarProyecto() {
+    console.log('Eliminado');
+    this.presentAlert();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Eliminar este proyecto',
+      subHeader: '¿Estas seguro?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => { },
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirm',
+          handler: () => {
+            this.uiService.toast('Proyecto borrado correctamente.', 'success');
+            this.router.navigateByUrl('/proyectos');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
   }
 
 }

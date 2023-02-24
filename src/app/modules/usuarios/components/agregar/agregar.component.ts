@@ -1,3 +1,5 @@
+import { catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/modules/utils/storage.service';
 import { UserService } from '../../user.service';
@@ -15,15 +17,15 @@ import showLoading from 'src/app/helpers/loading';
 export class AgregarComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    nombre: new FormControl('', [Validators.required]),
-    apellido: new FormControl('', [Validators.required]),
-    documento: new FormControl('', [Validators.required]),
-    domicilio: new FormControl('', [Validators.required]),
-    localidad: new FormControl('', [Validators.required]),
-    provincia: new FormControl('', [Validators.required]),
-    nombreUsuario: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-    password2: new FormControl('', [Validators.required]),
+    rol: new FormControl(2, [Validators.required]),
+    state: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -36,14 +38,20 @@ export class AgregarComponent implements OnInit {
 
   async saveData() {
     const user = this.form.value;
+    console.log('user: ', user);
     (await this.userService.addNewUser(user)).subscribe(
       (data) => {
         showLoading({ message: 'Enviando datos...', url: '/home', router: this.router });
-        this.storageService.set('proyecto', data);
+        this.storageService.set('newUser', data);
         showToast({message: `Usuario creado correctamente`, type: 'success'});
       },
-      ({ status }) => {
-        showToast({ message: `Ha ocurrido un error- Status: ${status}`, type: 'error'});
+      (e) => {
+
+        if(e.status === 409) {
+          showToast({ message: `Error inesperado`, type: 'error'});
+        }else {
+          showToast({ message: `El nombre de usuario ya existe`, type: 'error'});
+        }
       }
     );
 }

@@ -20,7 +20,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     CommonModule,
     UsuariosRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class UsuariosModule { }

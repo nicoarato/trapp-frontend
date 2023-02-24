@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from 'src/app/modules/utils/storage.service';
-import { from, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import {from, Observable, throwError } from 'rxjs';
+import { map, tap, catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 

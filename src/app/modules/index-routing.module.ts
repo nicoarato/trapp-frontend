@@ -5,27 +5,27 @@ const routes: Routes = [
     {
         path: 'home',
         loadChildren: () =>
-            import('../../app/modules/home/home.module').then((m) => m.HomePageModule)
+            import('./home/home.module').then((m) => m.HomePageModule)
     },
     {
         path: 'arboles',
         loadChildren: () =>
-            import('../../app/modules/arboles/arboles.module').then((m) => m.ArbolesModule)
+            import('./arboles/arboles.module').then((m) => m.ArbolesModule)
     },
     {
         path: 'proyectos',
         loadChildren: () =>
-            import('../../app/modules/proyectos/proyectos.module').then((m) => m.ProyectosModule)
+            import('./proyectos/proyectos.module').then((m) => m.ProyectosModule)
     },
     {
         path: 'reportes',
         loadChildren: () =>
-            import('../../app/modules/reportes/reportes.module').then((m) => m.ReportesModule)
+            import('./reportes/reportes.module').then((m) => m.ReportesModule)
     },
     {
         path: 'usuarios',
         loadChildren: () =>
-            import('../../app/modules/usuarios/usuarios.module').then((m) => m.UsuariosModule)
+            import('./usuarios/usuarios.module').then((m) => m.UsuariosModule)
     },
     {
         path: '',

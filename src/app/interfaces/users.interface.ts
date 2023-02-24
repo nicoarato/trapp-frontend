@@ -12,8 +12,9 @@ export interface UserLogin {
 }
 
 export interface NewUser {
-    document: string;
-    legajo: string;
+    email: string;
+    state: string;
+    city: string;
     firstname: string;
     lastname: string;
     username: string;

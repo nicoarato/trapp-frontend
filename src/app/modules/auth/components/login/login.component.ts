@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     (value) => {
                         this.uiService.cargando(false).then(() => {
-                            this.router.navigate(['']);
+                            this.router.navigate([''], {skipLocationChange: true } );
                         });
                     },
                     (error) => {

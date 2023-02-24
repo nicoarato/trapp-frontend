@@ -1,6 +1,11 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+
 import { UserService } from '../../user.service';
+
+import showToast from 'src/app/helpers/toast';
 
 @Component({
   selector: 'app-usuario',
@@ -9,48 +14,60 @@ import { UserService } from '../../user.service';
 })
 export class UsuarioComponent implements OnInit {
 
+  keys = [
+    'id',
+    'name',
+    'lastname',
+    'email',
+    'address',
+    'city',
+    'state',
+    'username',
+    'password',
+  ];
+
   form: FormGroup = new FormGroup({
-    id: new FormControl('', [Validators.required]),
-    nombre: new FormControl('', [Validators.required]),
-    apellido: new FormControl('', [Validators.required]),
-    documento: new FormControl('', [Validators.required]),
-    domicilio: new FormControl('', [Validators.required]),
-    localidad: new FormControl('', [Validators.required]),
-    provincia: new FormControl('', [Validators.required]),
-    nombreUsuario: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    id: new FormControl(''),
+    name: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    address: new FormControl(''),
+    city: new FormControl(''),
+    state: new FormControl(''),
+    username: new FormControl(''),
+    password: new FormControl(''),
   });
   checkedForm = true;
 
-  usuario = {
-    id: 3,
-    nombre: 'Alexis',
-    apellido: 'Dorrego',
-    documento: '1023654',
-    domicilio: 'Donnet 2525',
-    localidad: 'Esperanza',
-    provincia: 'Santa Fe',
-    nombreUsuario: 'dalexis',
-    password: 'holamundo',
-  };
 
-  data: any;
+  user: any;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
+    private router: Router,
+    private alertController: AlertController
+    ) {
 
-  ngOnInit() {
-      this.cargarDatos(this.usuario);
-      // this.data = this.userService.getUser(1);
-      // console.log(this.data.result);
+  }
 
-    }
+  async ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.userService.getUser(params.id).subscribe(({ result }) => {
+        this.user = result;
+        this.cargarDatos(this.user);
+      });
+    });
 
-  setValue(key,value) {
+
+   }
+
+  setValue(key, value) {
     this.form.get(key).setValue(value);
   }
 
   cargarDatos(datos) {
-    Object.keys(datos).map(x => {
+    this.keys.map(x => {
       this.setValue(x, datos[x]);
     });
   }
@@ -59,8 +76,52 @@ export class UsuarioComponent implements OnInit {
     this.checkedForm = !this.checkedForm;
   }
 
-  guardar() {
-    console.log(this.form.value);
+  actualizar() {
+    const datos = this.form.value;
+    this.userService.update(datos).subscribe(({statusCode})=> {
+      if (statusCode === 200){
+        showToast({message: `Usuario actualizado correctamente.`, type: 'success'});
+          this.router.navigateByUrl('/usuarios');
+      } else {
+        showToast({message: `Hubo un error al actualizar. Intente nuevamente.`, type: 'error'});
+      }
+    });
+  }
+
+  eliminarUsuario() {
+    const datos = this.form.value;
+    this.userService.delete(datos.id).subscribe(({statusCode})=> {
+      if (statusCode === 200){
+        showToast({message: `Usuario eliminado correctamente.`, type: 'success'});
+          this.router.navigateByUrl('/usuarios');
+      } else {
+        showToast({message: `Hubo un error. Intente nuevamente.`, type: 'error'});
+      }
+    });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Eliminar este usuario!',
+      subHeader: 'Estas seguro?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => { },
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirm',
+          handler: () => {
+            this.eliminarUsuario();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
   }
 
 

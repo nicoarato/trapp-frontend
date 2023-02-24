@@ -10,6 +10,7 @@ export class ListadoComponent implements OnInit {
 
   listado: any;
   proyectos: any[];
+
   constructor(private proyectoService: ProjectService) { }
 
   ngOnInit() {

@@ -1,3 +1,60 @@
-<p>
-  detalle-proyecto works!
-</p>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu de tu proyecto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-button (click)="exportarCsv()">Exportar csv 
+      <ion-icon name="cloud-download-outline"></ion-icon>
+    </ion-button>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    
+  </ion-content>
+</div>
+
+<app-header-options [title]="'Relevamiento'" [href]="'/proyectos'"></app-header-options>
+
+<ion-searchbar placeholder="Busca por domicilio o especie"></ion-searchbar>
+<ion-content class="listado-arboles">
+  <ion-card *ngIf="arboles && proyecto">
+    <ion-card-header>
+      <ion-card-title>Proyecto: {{proyecto.nombre}}</ion-card-title>
+      <ion-card-subtitle>Total de árboles {{arboles.length}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content >
+      <ion-list *ngFor="let arbol of arboles">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+          </ion-thumbnail>
+          
+            <ion-label>
+              <h2>{{arbol.direccion}}</h2>
+              <h3>{{arbol.nombre}}</h3>
+              <h4>{{arbol.manzana}}</h4>
+            </ion-label>
+          
+          <ion-button color="danger" (click)="redirectToTree(arbol.id)"> ver detalle</ion-button>
+        </ion-item>
+  
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  
+</ion-content>
+
+<app-footer></app-footer>

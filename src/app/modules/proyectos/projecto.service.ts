@@ -21,14 +21,18 @@ export class ProjectService {
   }
 
   getAllProjects() {
-    return this.http.get(`${API}/proyecto`);
+    return this.http.get<Response>(`${API}/proyecto`);
   }
 
   getProject(id: string) {
     return this.http.get<Response>(`${API}/proyecto/${id}`);
   }
 
-  updateProject(datos: any) {
+  update(datos: any) {
     return this.http.put(`${API}/proyecto/${datos.id}`, datos);
+  }
+
+  getTreesByProject(id: string) {
+    return this.http.get<Response>(`${API}/proyecto/${id}/arboles`);
   }
 }
