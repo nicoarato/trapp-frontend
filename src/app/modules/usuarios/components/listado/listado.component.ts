@@ -1,3 +1,4 @@
+import { UserService } from './../../user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,46 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listado.component.scss'],
 })
 export class ListadoComponent implements OnInit {
-  arrayUsuarios = [
-    {
-      id: 1,
-      nombre: 'Carlos',
-      apellido: 'Lopez',
-      documento: '1023654',
-      domicilio: 'Sarmiento 2525',
-      localidad: 'Esperanza',
-      provincia: 'Santa Fe',
-      nombreUsuario: 'lcarlos'
-    },
-    {
-      id: 2,
-      nombre: 'Pedro',
-      apellido: 'Argel',
-      documento: '1023654',
-      domicilio: 'San Martin 2525',
-      localidad: 'Esperanza',
-      provincia: 'Santa Fe',
-      nombreUsuario: 'apedro'
-    },
-    {
-      id: 3,
-      nombre: 'Alexis',
-      apellido: 'Dorrego',
-      documento: '1023654',
-      domicilio: 'Donnet 2525',
-      localidad: 'Esperanza',
-      provincia: 'Santa Fe',
-      nombreUsuario: 'dalexis'
-    },
-];
-usuarios = this.arrayUsuarios;
 
-  constructor() { }
+  listado: any;
+  usuarios: any[];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.getAllUsers().subscribe((data) => {
+      this.listado = data;
+      this.usuarios = this.listado.result;
+    });
+  }
 
   handleSearch({target: { value }}) {
-    this.usuarios = this.arrayUsuarios.filter(({nombre, apellido, nombreUsuario}) =>
-    nombre.includes(value) || apellido.includes(value) || nombreUsuario.includes(value));
+    this.usuarios = this.listado.result.filter(({name, username}) =>
+    name.toLowerCase().includes(value.toLowerCase())
+    || username.toLowerCase().includes(value.toLowerCase())
+    );
   }
-  ngOnInit() {}
 
 }

@@ -13,43 +13,44 @@
       <form [formGroup]="form" novalidate>
           <ion-card class="m-auto">
               <ion-card-header>
-                <ion-card-title class="p-5 text-3xl text-center">Registrar Nuevo Usuario</ion-card-title>
+                <ion-card-title class="p-5 text-3xl text-center">Editar Usuario</ion-card-title>
               </ion-card-header>
               <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
                 <ion-item fill="outline">
-                  <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text" formControlName="nombre" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Nombre</ion-label>
+                  <ion-input type="text" formControlName="name" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Apellido</ion-label>
-                  <ion-input type="text" formControlName="apellido" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Apellido</ion-label>
+                  <ion-input type="text" formControlName="lastname" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Documento de identidad</ion-label>
-                  <ion-input type="text" formControlName="documento" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Email</ion-label>
+                  <ion-input type="email" formControlName="email" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Domicilio</ion-label>
-                  <ion-input type="text" formControlName="domicilio" placeholder="Ingrese cantidad en horas" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Domicilio</ion-label>
+                  <ion-input type="text" formControlName="address" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Localidad</ion-label>
-                  <ion-input type="text" formControlName="localidad" placeholder="Ingrese cantidad en horas" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Localidad</ion-label>
+                  <ion-input type="text" formControlName="city" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Provincia</ion-label>
-                  <ion-input type="text" formControlName="provincia" placeholder="Ingrese cantidad en horas" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Provincia</ion-label>
+                  <ion-input type="text" formControlName="state" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Nombre de usuario</ion-label>
-                  <ion-input type="text" formControlName="nombreUsuario" placeholder="Ingrese cantidad en horas" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Nombre de usuario</ion-label>
+                  <ion-input type="text" formControlName="username" [disabled]="checkedForm"></ion-input>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Contraseña</ion-label>
-                  <ion-input type="password" formControlName="password" placeholder="Ingrese cantidad en horas" [disabled]="checkedForm"></ion-input>
+                  <ion-label position="stacked">Nueva Contraseña</ion-label>
+                  <ion-input 
+                  type="password" formControlName="password" [disabled]="checkedForm"></ion-input>
                 </ion-item>
-                <ion-button expand="block" size="medium" [disabled]="(form.invalid && checkedForm)" (click)="guardar()" type="button">Guardar cambios</ion-button>
-                <ion-button expand="block" size="medium" [disabled]="(checkedForm)" type="button" color="danger">Eliminar usuario</ion-button>
+                <ion-button expand="block" size="medium" [disabled]="checkedForm && !form.dirty" (click)="actualizar()" type="button">Guardar cambios</ion-button>
+                <ion-button expand="block" size="medium" [disabled]="(checkedForm)" type="button" (click)="presentAlert()" color="danger">Eliminar usuario</ion-button>
               </ion-card-content>
           </ion-card>
       </form>

@@ -1,11 +1,11 @@
-<app-header-options [title]="'Nuevo Arbol'" [href]="'home'"></app-header-options>
+<app-header-options [title]="arbol.nombre" [href]="'/proyectos/detalle/' + arbol.proyecto + '/arboles'"></app-header-options>
 
 <ion-content class="formulario-slide">
   
   <ion-slides pager="true" [options]="slideOpts" #mySlider>
     
-    <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()" novalidate>
+    <ion-slide *ngIf="arbol">
+      <form [formGroup]="form" (ngSubmit)="actualizar()" novalidate>
         <ion-card>
           <ion-card-header>
             <ion-label>Ubicación</ion-label>
@@ -13,32 +13,24 @@
 
           <ion-card-content>
 
-              <ion-item  >
-                <ion-label position="floating">Asociar al Proyecto</ion-label>
-                <ion-select formControlName="proyecto">
-                  <ion-list *ngIf="proyectos">
-                    <ion-select-option *ngFor="let p of proyectos" [value]="p.id">{{p.nombre}}</ion-select-option>
-                  </ion-list>
-                </ion-select>
-              </ion-item>
 
               <ion-item >
                 <ion-label position="floating">Nombre asignado al árbol</ion-label>
-                <ion-input (ionChange)="getValue('nombre', $event)" type="text" formControlName="nombre" placeholder="Ej: ABCDE1234"></ion-input>
+                <ion-input type="text" formControlName="nombre" placeholder="Ej: ABCDE1234" ></ion-input>
               </ion-item>
 
             
             <ion-item >
               <ion-label position="floating">Dirección/Sitio</ion-label>
-              <ion-input (ionChange)="getValue('direccion', $event)" type="text" formControlName="direccion"></ion-input>
+              <ion-input type="text" formControlName="direccion" ></ion-input>
             </ion-item>
             <ion-item >
               <ion-label position="floating">Barrio</ion-label>
-              <ion-input (ionChange)="getValue('barrio', $event)" type="text" formControlName="barrio"></ion-input>
+              <ion-input type="text" formControlName="barrio" ></ion-input>
             </ion-item>
             <ion-item >
               <ion-label position="floating">Manzana</ion-label>
-              <ion-input (ionChange)="getValue('manzana', $event)" type="text" formControlName="manzana"></ion-input>
+              <ion-input type="text" formControlName="manzana" ></ion-input>
             </ion-item>
 
           </ion-card-content>
@@ -51,9 +43,8 @@
        
       </form>
     </ion-slide>
-
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()" novalidate>
+      <form [formGroup]="form" (ngSubmit)="actualizar()" novalidate>
         <ion-card>
           <ion-card-header>
             <ion-label>Ubicación</ion-label>
@@ -61,22 +52,22 @@
 
           <ion-card-content>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Latitud </ion-label>
               <ion-icon slot="end" name="locate-outline" (click)="getCoordinates()"></ion-icon>
-              <ion-input  type="text" formControlName="latitud"></ion-input>
+              <ion-input type="text" formControlName="latitud"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Longitud</ion-label>
-              <ion-input  type="text" formControlName="longitud"></ion-input>
+              <ion-input type="text" formControlName="longitud"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label>Faltante</ion-label>
               <ion-toggle type="text" formControlName="faltante"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>Muerto</ion-label>
               <ion-toggle type="text" formControlName="muerto"></ion-toggle>
             </ion-item>
@@ -98,30 +89,30 @@
     </ion-slide>
 
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Características</ion-label>
           </ion-card-header>
           <ion-card-content>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Especie</ion-label>
-              <ion-input (ionChange)="getValue('especie', $event)" type="text" formControlName="especie"></ion-input>
+              <ion-input type="text" formControlName="especie"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Perimetro</ion-label>
-              <ion-input (ionChange)="getValue('perimetro', $event)" type="text" formControlName="perimetro"></ion-input>
+              <ion-input type="text" formControlName="perimetro"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Altura</ion-label>
               <ion-icon slot="end" name="contract-outline"></ion-icon>
-              <ion-input (ionChange)="getValue('altura', $event)" type="text" formControlName="altura"></ion-input>
+              <ion-input type="text" formControlName="altura"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Inlinación de tronco</ion-label>
               <ion-icon slot="end" name="contract-outline"></ion-icon>
-              <ion-input (ionChange)="getValue('inclinacion', $event)" type="text" formControlName="inclinacion"></ion-input>
+              <ion-input type="text" formControlName="inclinacion"></ion-input>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -139,27 +130,27 @@
     </ion-slide>
 
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Características</ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Forma</ion-label>
-              <ion-input (ionChange)="getValue('forma', $event)" type="text" formControlName="forma"></ion-input>
+              <ion-input type="text" formControlName="forma"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Valor de árbol</ion-label>
-              <ion-input (ionChange)="getValue('valorDeArbol', $event)" type="text" formControlName="valorDeArbol"></ion-input>
+              <ion-input type="text" formControlName="valorDeArbol"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Enfermedades</ion-label>
-              <ion-input (ionChange)="getValue('enfermedades', $event)" type="text" formControlName="enfermedades"></ion-input>
+              <ion-input type="text" formControlName="enfermedades"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Plagas</ion-label>
-              <ion-input (ionChange)="getValue('plagas', $event)" type="text" formControlName="plagas"></ion-input>
+              <ion-input type="text" formControlName="plagas"></ion-input>
             </ion-item>
           </ion-card-content>
         </ion-card>
@@ -177,29 +168,29 @@
     </ion-slide>
 
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Factores de carga</ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-item>
+            <ion-item >
               <ion-label>Exposición al viento dominante</ion-label>
               <ion-toggle type="text" formControlName="exposicionAlVientoDominante"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Vigor</ion-label>
-              <ion-input (ionChange)="getValue('vigor', $event)" type="text" formControlName="vigor"></ion-input>
+              <ion-input type="text" formControlName="vigor"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Densidad de Copa</ion-label>
-              <ion-input (ionChange)="getValue('densidadDeCopa', $event)" type="text" formControlName="densidadDeCopa"></ion-input>
+              <ion-input type="text" formControlName="densidadDeCopa"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Espacio de crecimiento</ion-label>
-              <ion-input (ionChange)="getValue('espacioDeCrecimiento', $event)" type="text" formControlName="espacioDeCrecimiento"></ion-input>
+              <ion-input type="text" formControlName="espacioDeCrecimiento"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>¿Plato radicular levantado o raíces expuestas?</ion-label>
               <ion-toggle type="text" formControlName="platoRadicularORaicesExpuestas"></ion-toggle>
             </ion-item>
@@ -219,25 +210,25 @@
 
     <!-- blanco bajo el arbol -->
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Blanco bajo el árbol</ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-item>
+            <ion-item >
               <ion-label>Uso bajo el árbol</ion-label>
               <ion-toggle type="text" formControlName="usoBajoElArbol"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Tasa de uso</ion-label>
-              <ion-input (ionChange)="getValue('tasaDeUso', $event)" type="text" formControlName="tasaDeUso"></ion-input>
+              <ion-input type="text" formControlName="tasaDeUso"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>¿Puede moverse el blanco?</ion-label>
               <ion-toggle type="text" formControlName="movilidadDeBlanco"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>¿Puede restringirse el uso?</ion-label>
               <ion-toggle type="text" formControlName="restriccionDeUso"></ion-toggle>
             </ion-item>
@@ -257,25 +248,25 @@
 
     <!-- Defecto en raices -->
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Defectos en las raíces</ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-item>
+            <ion-item >
               <ion-label>Cuerpos fructíferos de hongos en cuello?</ion-label>
               <ion-toggle  formControlName="raicesCuerposFructiferos"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>Daño menánico a raíces?</ion-label>
               <ion-toggle formControlName="raicesDanoMecanico"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>Raices estrangulantes</ion-label>
               <ion-toggle formControlName="raicesEstrangulantes"></ion-toggle>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label>Defectos en reaíces</ion-label>
               <ion-toggle formControlName="defectosEnRaices"></ion-toggle>
             </ion-item>
@@ -296,14 +287,14 @@
 
     <!-- Defecto en tronco -->
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Defectos en tronco y cuello</ion-label>
           </ion-card-header>
           <ion-card-content>
 
-            <ion-item>
+            <ion-item >
               <ion-label>Cancros</ion-label>
               <ion-select formControlName="troncoCancros">
                 <ion-list>
@@ -315,10 +306,10 @@
                       </ion-select-option>
                 </ion-list>
               </ion-select>
-              <ion-input placeholder="LX- cancros" (ionChange)="getValue('lxCancroTronco', $event)" formControlName="lxCancroTronco"></ion-input>
+              <ion-input placeholder="LX- cancros" formControlName="lxCancroTronco"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label>Cavidades</ion-label>
               <ion-select formControlName="troncoCavidades">
                 <ion-list>
@@ -328,17 +319,17 @@
                   <ion-select-option value="AFECTA_MORE_50">Afecta > 50% </ion-select-option>
                 </ion-list>
               </ion-select>
-              <ion-input placeholder="T espesor (cm)" (ionChange)="getValue('tEspesorDeParedTronco', $event)" formControlName="tEspesorDeParedTronco"></ion-input>
+              <ion-input placeholder="T espesor (cm)" formControlName="tEspesorDeParedTronco"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Coeficiente de esbeltez</ion-label>
-              <ion-input placeholder="T espesor (cm)" (ionChange)="getValue('coeficienteDeEsbeltez', $event)" formControlName="coeficienteDeEsbeltez"></ion-input>
+              <ion-input placeholder="T espesor (cm)" formControlName="coeficienteDeEsbeltez"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Fustes múltiples</ion-label>
-              <ion-select (ionChange)="getValue('troncoFustesMultiples', $event)">
+              <ion-select formControlName="coeficienteDeEsbeltez">
                 <ion-list>
                   <ion-select-option value="NO">No</ion-select-option>
                   <ion-select-option value="SI">Si</ion-select-option>
@@ -349,14 +340,14 @@
               </ion-select>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label>Horquetas</ion-label>
               <ion-toggle formControlName="troncoHorquetas"></ion-toggle>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Inclinación</ion-label>
-              <ion-input placeholder="(º grados)" (ionChange)="getValue('troncoInclinacion', $event)" formControlName="troncoInclinacion"></ion-input>
+              <ion-input placeholder="(º grados)" formControlName="troncoInclinacion"></ion-input>
             </ion-item>
 
           </ion-card-content>
@@ -375,13 +366,13 @@
     </ion-slide>
 
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Defectos en tronco y cuello</ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Heridas</ion-label>
               <ion-select formControlName="troncoHeridas">
                 <ion-list>
@@ -393,7 +384,7 @@
                 </ion-list>
               </ion-select>
             </ion-item>
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Inclinación</ion-label>
               <ion-select formControlName="troncoInclinacion">
                 <ion-list>
@@ -405,7 +396,7 @@
               </ion-select>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Orificios de taladros de madera o corteza</ion-label>
               <ion-select formControlName="troncoOrificios">
                 <ion-list>
@@ -417,7 +408,7 @@
               </ion-select>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Pudrición de madera</ion-label>
               <ion-select formControlName="troncoPudricionDeMadera">
                 <ion-list>
@@ -431,7 +422,7 @@
               </ion-select>
             </ion-item>
 
-            <ion-item>
+            <ion-item >
               <ion-label position="floating">Rajaduras</ion-label>
               <ion-select formControlName="troncoRajaduras">
                 <ion-list>
@@ -456,14 +447,14 @@
     </ion-slide>
 
     <ion-slide>
-      <form [formGroup]="form" (ngSubmit)="saveData()">
+      <form [formGroup]="form" (ngSubmit)="actualizar()">
         <ion-card>
           <ion-card-header>
             <ion-label>Defectos en ramas estructurales</ion-label>
           </ion-card-header>
           <ion-card-content>
 
-              <ion-item>
+              <ion-item >
                 <ion-label>Cancros</ion-label>
                 <ion-select formControlName="ramasCancros">
                   <ion-list>
@@ -475,10 +466,10 @@
                         </ion-select-option>
                   </ion-list>
                 </ion-select>
-                <ion-input placeholder="LX- cancros" (ionChange)="getValue('lxCancroTronco', $event)" formControlName="lxCancroTronco"></ion-input>
+                <ion-input placeholder="LX- cancros" formControlName="lxCancroTronco"></ion-input>
               </ion-item>
 
-              <ion-item>
+              <ion-item >
                 <ion-label>Cavidades</ion-label>
                 <ion-select formControlName="ramasCavidades">
                   <ion-list>
@@ -490,7 +481,7 @@
                 </ion-select>
               </ion-item>
 
-              <ion-item>
+              <ion-item >
                 <ion-label>Ramas colgantes o quebrantes</ion-label>
                 <ion-select formControlName="ramasColgantesQuebrantes">
                   <ion-list>
@@ -501,22 +492,22 @@
                 </ion-select>
               </ion-item>
 
-              <ion-item>
+              <ion-item >
                 <ion-label>Ramas muertas</ion-label>
                 <ion-toggle formControlName="ramasMuertas"></ion-toggle>
               </ion-item>
 
-              <ion-item>
+              <ion-item >
                 <ion-label position="floating">Rajaduras</ion-label>
-                <ion-input (ionChange)="getValue('ramasRajaduras', $event)" formControlName="ramasRajaduras"></ion-input>
+                <ion-input formControlName="ramasRajaduras"></ion-input>
               </ion-item>
 
-              <ion-item>
+              <ion-item >
                 <ion-label position="floating">Pudrición de madera</ion-label>
-                <ion-input (ionChange)="getValue('ramasPudricionDeMadera', $event)" formControlName="ramasPudricionDeMadera"></ion-input>
+                <ion-input formControlName="ramasPudricionDeMadera"></ion-input>
               </ion-item>
 
-              <ion-item>
+              <ion-item >
                 <ion-label position="floating">Interferencia eléctrica </ion-label>
                   <ion-select formControlName="ramasInterferenciaElectrica">
                     <ion-list>
@@ -535,7 +526,10 @@
           Anterior
         </ion-button>
         <ion-button expand="block" (click)="reset()" [disabled]="form.invalid">
-          Enviar
+          Guardar cambios
+        </ion-button>        
+        <ion-button expand="block" (click)="eliminar()" color="danger" [disabled]="form.invalid">
+          Eliminar
         </ion-button>
       </form>
     </ion-slide>

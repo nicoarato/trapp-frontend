@@ -8,9 +8,10 @@ import { ArbolesRoutingModule } from './arboles-routing.module';
 import { HeaderOptionsComponent } from './../../components/header-options/header-options.component';
 
 import { AgregarComponent } from './components/agregar/agregar.component';
+import { ArbolComponent } from './components/arbol/arbol.component';
 
 @NgModule({
-  declarations: [AgregarComponent, HeaderOptionsComponent],
+  declarations: [AgregarComponent, HeaderOptionsComponent, ArbolComponent],
   imports: [
     IonicModule,
     CommonModule,

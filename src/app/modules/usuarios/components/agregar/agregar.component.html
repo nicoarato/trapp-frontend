@@ -13,42 +13,47 @@
               </ion-card-header>
               <ion-card-content class="grid grid-rows-3 gap-5 m-auto max-w-lg pl-5 pr-5">
                 <ion-item fill="outline">
-                  <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text" formControlName="nombre"></ion-input>
+                  <ion-label position="floating">Nombre*</ion-label>
+                  <ion-input type="text" formControlName="name"></ion-input>
+                  <ion-note *ngIf="form.get('name').errors && (form.get('name').dirty || form.get('name').touched)" slot="error">Campo obligatorio</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Apellido</ion-label>
-                  <ion-input type="text" formControlName="apellido"></ion-input>
+                  <ion-label position="floating">Apellido*</ion-label>
+                  <ion-input type="text" formControlName="lastname"></ion-input>
+                  <ion-note *ngIf="form.get('lastname').errors && (form.get('lastname').dirty || form.get('lastname').touched)" slot="error">Campo obligatorio</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Documento de identidad</ion-label>
-                  <ion-input type="text" formControlName="documento"></ion-input>
+                  <ion-label position="floating">Email*</ion-label>
+                  <ion-input type="email" ngModel email formControlName="email"></ion-input>
+                  <ion-note *ngIf="form.get('email').errors && (form.get('email').dirty || form.get('email').touched)" slot="error">Campo obligatorio</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Domicilio</ion-label>
-                  <ion-input type="text" formControlName="domicilio"></ion-input>
+                  <ion-label position="floating">Nombre de usuario*</ion-label>
+                  <ion-input type="text" formControlName="username" ngModel minlength="6"></ion-input>
+                  <ion-note *ngIf="form.get('username').errors && (form.get('username').dirty || form.get('username').touched)" slot="error">Min 6 caracteres</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Localidad</ion-label>
-                  <ion-input type="text" formControlName="localidad"></ion-input>
+                  <ion-label position="floating">Domicilio*</ion-label>
+                  <ion-input type="text" formControlName="address"></ion-input>
+                  <ion-note *ngIf="form.get('address').errors && (form.get('address').dirty || form.get('address').touched)" slot="error">Campo obligatorio</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Provincia</ion-label>
-                  <ion-input type="text" formControlName="provincia"></ion-input>
+                  <ion-label position="floating">Localidad*</ion-label>
+                  <ion-input type="text" formControlName="city"></ion-input>
+                  <ion-note *ngIf="form.get('city').errors && (form.get('city').dirty || form.get('city').touched)" slot="error">Campo obligatorio</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Nombre de usuario</ion-label>
-                  <ion-input type="text" formControlName="nombreUsuario"></ion-input>
+                  <ion-label position="floating">Provincia*</ion-label>
+                  <ion-input type="text" formControlName="state"></ion-input>
+                  <ion-note *ngIf="form.get('state').errors && (form.get('state').dirty || form.get('state').touched)" slot="error">Campo obligatorio</ion-note>
                 </ion-item>
                 <ion-item fill="outline">
-                  <ion-label position="floating">Contraseña</ion-label>
-                  <ion-input type="password"  formControlName="password"></ion-input>
+                  <ion-label position="floating">Contraseña*</ion-label>
+                  <ion-input type="password"   formControlName="password" ngModel minlength="6" ></ion-input>
+                  <ion-note *ngIf="form.get('password').errors && form.get('password').dirty || form.get('password').touched" slot="error">Min 6 caracteres</ion-note>
                 </ion-item>
-                <ion-item fill="outline">
-                  <ion-label position="floating">Contraseña</ion-label>
-                  <ion-input type="password" formControlName="password2"></ion-input>
-                </ion-item>
-                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="submit()" type="button">Registrar</ion-button>
+
+                <ion-button expand="block" size="medium" [disabled]="form.invalid" (click)="saveData()" type="button">Registrar</ion-button>
               </ion-card-content>
           </ion-card>
       </form>

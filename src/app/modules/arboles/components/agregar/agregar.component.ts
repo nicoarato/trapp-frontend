@@ -2,6 +2,8 @@
 import showToast from 'src/app/helpers/toast';
 import showLoading from 'src/app/helpers/loading';
 
+import { Geolocation } from '@capacitor/geolocation';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,10 +12,10 @@ import { IonSlides } from '@ionic/angular';
 import { ProjectService } from 'src/app/modules/proyectos/projecto.service';
 import { StorageService } from 'src/app/modules/utils/storage.service';
 import { TreesService } from '../../arboles.service';
+import { UiService } from './../../../utils/ui.service';
 
 import { transformProjects } from 'src/app/modules/proyectos/transform';
 
-import { Geolocation } from '@capacitor/geolocation';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
@@ -43,7 +45,8 @@ export class AgregarComponent implements OnInit {
     private router: Router,
     private storageService: StorageService,
     private arbolesService: TreesService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private uiService: UiService
   ) { }
 
   newDate() {
@@ -153,7 +156,9 @@ export class AgregarComponent implements OnInit {
   }
 
   async getCoordinates() {
+    this.uiService.cargando(true);
     const {coords: {latitude, longitude}} = await Geolocation.getCurrentPosition();
+    this.uiService.cargando(false);
     this.form.get('latitud').setValue(latitude);
     this.form.get('longitud').setValue(longitude);
    }
