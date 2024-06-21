@@ -34,13 +34,13 @@ export class HomeComponent implements OnInit {
 
   items = [
     {
-      link: '/proyectos',
+      link: '/arboles',
       img: '../../assets/icon/logoMod.png',
       label: 'Registro de árboles',
       class: 'logo-on',
     },
     {
-      link: '/usuarios',
+      link: '/arboles',
       img: '../../assets/icon/logoMod.png',
       label: 'Registro de árboles',
       class: 'logo-off',
