@@ -11,6 +11,42 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   isAdmin: boolean;
 
+  adminItems = [
+    {
+      link: '/proyectos',
+      img: '../../assets/icon/direcciones.png',
+      label: 'Proyectos',
+      class: 'logo-on',
+    },
+    {
+      link: '/usuarios',
+      img: '../../assets/icon/usuario.png',
+      label: 'Usuarios',
+      class: 'logo-on',
+    },
+    {
+      link: '/proyectos',
+      img: '../../assets/icon/reporte.png',
+      label: 'Reportes',
+      class: 'logo-on',
+    }
+  ];
+
+  items = [
+    {
+      link: '/proyectos',
+      img: '../../assets/icon/logoMod.png',
+      label: 'Registro de árboles',
+      class: 'logo-on',
+    },
+    {
+      link: '/usuarios',
+      img: '../../assets/icon/logoMod.png',
+      label: 'Registro de árboles',
+      class: 'logo-off',
+    },
+  ];
+
   constructor(
     private authService: AuthService,
     private alertController: AlertController,

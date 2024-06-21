@@ -1,98 +1,67 @@
 <ion-app>
-
+ <!-- Menú lateral -->
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu de usuario</ion-title>
+        <ion-title>Menú de Usuario</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-button color="danger" (click)="presentAlert()">Cerrar sesión
-        <ion-icon name="log-out-outline"></ion-icon>
+      <ion-button color="danger" (click)="presentAlert()">
+        Cerrar sesión
+        <ion-icon slot="end" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-content>
   </ion-menu>
+    
+<!-- Contenido principal aquí -->
   <div class="ion-page" id="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Menu</ion-title>
+        <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
-      
-    </ion-content>
   </div>
   
   <app-header [title]="'Registro de árboles'" ></app-header>
+  <ion-content [fullscreen]="true" class="ion-padding">
 
-<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid>
+    <!-- Sección para Admin -->
+    <ion-row *ngIf="isAdmin" class="ion-justify-content-center">
+      <ion-col *ngFor="let item of adminItems">
+        <ion-card>
+          <a [routerLink]="item.link">
+            <ion-card-content>
+              <img class="{{item.class}}" [src]="item.img">
+              <div class="ion-text-nowrap">
+                <h1 class="action-label">{{ item.label }}</h1>
+              </div>
+            </ion-card-content>
+          </a>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-    <ion-grid>
-
-      <ion-row *ngIf="isAdmin" class="ion-justify-content-center">
-        <ion-col size="6">
-            <ion-card>
-              <a href="/proyectos">
-                <ion-card-content>
-                  <img class="logo-off" src="../../assets/icon/proyecto100.png">
-                      </ion-card-content>
-                  </a>
-                  </ion-card>
-        </ion-col>
-      </ion-row>
-
-      <ion-row *ngIf="isAdmin" class="ion-justify-content-center">
-        <ion-col size="6">
-            <ion-card>
-              <a href="/usuarios">
-                <ion-card-content>
-                  <img class="logo-off" src="../../assets/icon/usuarios100.png">
-                      </ion-card-content>
-                  </a>
-                  </ion-card>
-        </ion-col>
-      </ion-row>
-
-      <ion-row *ngIf="isAdmin" class="ion-justify-content-center">
-        <ion-col size="6">
-            <ion-card>
-              <a href="/proyectos">
-                <ion-card-content>
-                  <img class="logo-off" src="../../assets/icon/reportes100.png">
-                      </ion-card-content>
-                  </a>
-                  </ion-card>
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="ion-justify-content-center">
-          <ion-col size="6">
-              <ion-card>
-                        <a href="/arboles">
-                        <ion-card-content>
-                            <img class="logo-on" src="../../assets/icon/logo100.png">
-                        </ion-card-content>
-                      </a>
-                    </ion-card>
-          </ion-col>
-        </ion-row>
-    
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="6">
-            <ion-card>
-                      <a href="/arboles">
-                      <ion-card-content>
-                          <img class="logo-off" src="../../assets/icon/logo100.png">
-                      </ion-card-content>
-                  </a>
-                  </ion-card>
-        </ion-col>
-      </ion-row>
-   
-    </ion-grid>
+    <!-- Registro de árboles -->
+    <ion-row class="ion-justify-content-center">
+      <ion-col *ngFor="let item of items">
+        <ion-card>
+          <a [routerLink]="item.link">
+            <ion-card-content>
+              <img class="{{item.class}}" [src]="item.img">
+              <div class="ion-text-nowrap">
+                <h1 class="action-label">{{ item.label }}</h1>
+              </div>
+            </ion-card-content>
+          </a>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <app-footer></app-footer>
