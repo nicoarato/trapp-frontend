@@ -257,7 +257,7 @@ export class ArbolComponent implements OnInit {
    }
 
    eliminar() {
-    console.log('eliminar')
+    console.log('eliminar');
    }
 
 }
