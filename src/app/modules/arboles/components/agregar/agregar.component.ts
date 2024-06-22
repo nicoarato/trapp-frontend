@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 
-import { ProjectService } from 'src/app/modules/proyectos/projecto.service';
+import { ProjectService } from 'src/app/modules/proyectos/proyecto.service';
 import { StorageService } from 'src/app/modules/utils/storage.service';
 import { TreesService } from '../../arboles.service';
 import { UiService } from './../../../utils/ui.service';

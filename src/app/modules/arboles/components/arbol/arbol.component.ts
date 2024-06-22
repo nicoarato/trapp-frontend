@@ -1,5 +1,5 @@
 import { UiService } from './../../../utils/ui.service';
-import { ProjectService } from 'src/app/modules/proyectos/projecto.service';
+import { ProjectService } from 'src/app/modules/proyectos/proyecto.service';
 import { StorageService } from './../../../utils/storage.service';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, switchMap, tap } from 'rxjs/operators';
 
-import { ProjectService } from './../../projecto.service';
+import { ProjectService } from '../../proyecto.service';
 
 
 @Component({
@@ -40,8 +40,24 @@ export class DetalleProyectoComponent implements OnInit {
   }
 
   async exportarCsv() {
-    console.log('Agregar funcionalidad');
+    const projectId = this.proyecto.id;
     await this.uiService.cargando(true);
     this.uiService.toast('Procesando el archivo.', 'tertiary');
+    this.projectService.exportTreesToCSV(projectId).subscribe(
+      blob => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = `arboles_${projectId}.csv`;
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+        this.uiService.cargando(false);
+      },
+      error => {
+        this.uiService.cargando(false);
+        this.uiService.toast('Error al procesar el archivo.', 'danger');
+        console.error('Error al exportar CSV:', error);
+      }
+    );
   }
 }

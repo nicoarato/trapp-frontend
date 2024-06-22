@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
-import { ProjectService } from '../../projecto.service';
+import { ProjectService } from '../../proyecto.service';
 import { UiService } from './../../../utils/ui.service';
 
 interface Proyecto {

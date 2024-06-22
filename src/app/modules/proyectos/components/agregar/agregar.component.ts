@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import showToast from 'src/app/helpers/toast';
 import showLoading from 'src/app/helpers/loading';
 import { UiService } from '../../../utils/ui.service';
-import { ProjectService } from '../../projecto.service';
+import { ProjectService } from '../../proyecto.service';
 import { StorageService } from 'src/app/modules/utils/storage.service';
 
 @Component({

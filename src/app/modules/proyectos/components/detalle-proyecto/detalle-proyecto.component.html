@@ -5,24 +5,12 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-button (click)="exportarCsv()">Exportar csv 
+    <ion-button (click)="exportarCsv(proyecto.id)">Exportar csv 
       <ion-icon name="cloud-download-outline"></ion-icon>
     </ion-button>
   </ion-content>
 </ion-menu>
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    
-  </ion-content>
-</div>
+
 
 <app-header-options [title]="'Relevamiento'" [href]="'/proyectos'"></app-header-options>
 
@@ -46,7 +34,7 @@
               <h4>{{arbol.manzana}}</h4>
             </ion-label>
           
-          <ion-button color="danger" (click)="redirectToTree(arbol.id)"> ver detalle</ion-button>
+          <ion-button color="secondary" (click)="redirectToTree(arbol.id)"> ver detalle</ion-button>
         </ion-item>
   
         
