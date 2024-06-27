@@ -197,15 +197,9 @@ export class ArbolComponent implements OnInit {
         this.proyectoId = this.arbol.proyecto.id;
       });
     });
-
-
-
   }
 
-
   setValue(key, value) {
-    console.log(`${key}: ${value}`);
-
     this.form.get(key).setValue(value);
   }
 
@@ -235,17 +229,15 @@ export class ArbolComponent implements OnInit {
         this.uiService.cargando(false);
         if (statusCode === 200){
           this.uiService.toast('Árbol actualizado correctamente.', 'success');
+          this.router.navigateByUrl(`/proyectos/detalle/${this.proyectoId}/arboles`);
         }
       },
       error => {
         console.log(error);
-          this.uiService.cargando(false);
-          this.uiService.toast('Hubo un error al actualizar. Intente nuevamente.', 'danger');
+        this.uiService.cargando(false);
+        this.uiService.toast('Hubo un error al actualizar. Intente nuevamente.', 'danger');
 
       });
-
-      this.router.navigateByUrl(`/proyectos/detalle/${this.proyectoId}/arboles`);
-
   }
 
   async getCoordinates() {
@@ -257,7 +249,21 @@ export class ArbolComponent implements OnInit {
    }
 
    eliminar() {
-    console.log('eliminar');
+    this.uiService.cargando(true);
+      this.arbolesService.deleteById(this.arbol.id)
+      .subscribe(({statusCode})=> {
+        this.uiService.cargando(false);
+        if (statusCode === 200){
+          this.uiService.toast('Árbol eliminado correctamente.', 'success');
+          this.router.navigateByUrl(`/proyectos/detalle/${this.proyectoId}/arboles`);
+        }
+      },
+      error => {
+        console.log(error);
+        this.uiService.cargando(false);
+        this.uiService.toast('Hubo un error al eliminar. Intente nuevamente.', 'danger');
+
+      });
    }
 
 }

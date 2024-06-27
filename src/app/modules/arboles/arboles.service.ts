@@ -36,4 +36,8 @@ export class TreesService {
     return this.http.patch<Response>(`${API}/arbol/${id}`, datos);
   }
 
+  deleteById(id: number): Observable<any> {
+    return this.http.delete<Response>(`${API}/arbol/${id}`);
+  }
+
 }

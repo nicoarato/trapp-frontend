@@ -29,8 +29,8 @@ export class ProjectService {
     return this.http.get<Response>(`${API}/proyecto/${id}`);
   }
 
-  update(datos: any) {
-    return this.http.put(`${API}/proyecto/${datos.id}`, datos);
+  update(id: number, datos: any): Observable<any> {
+    return this.http.patch<Response>(`${API}/proyecto/${id}`, datos);
   }
 
   getTreesByProject(id: string) {
@@ -41,5 +41,9 @@ export class ProjectService {
     return this.http.get(`${API}/arbol/export/csv/${projectId}`, {
       responseType: 'blob'
     });
+  }
+
+  deleteById(id: number): Observable<any> {
+    return this.http.delete<Response>(`${API}/proyecto/${id}`);
   }
 }

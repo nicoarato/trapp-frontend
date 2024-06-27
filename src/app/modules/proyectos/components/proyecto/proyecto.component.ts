@@ -24,19 +24,17 @@ export class ProyectoComponent implements OnInit {
   proyecto: Proyecto;
 
   form: FormGroup = new FormGroup({
-    id: new FormControl('', [Validators.required]),
     nombre: new FormControl('', [Validators.required]),
     localidad: new FormControl('', [Validators.required]),
     provincia: new FormControl('', [Validators.required]),
-    domicilio: new FormControl('', [Validators.required]),
     tiempoEstimado: new FormControl('', [Validators.required]),
-    updatedAt: new FormControl('', [Validators.required]),
-    createdAt: new FormControl('', [Validators.required]),
-
   });
   checkedForm = true;
   date: any;
   codigoProyecto: number;
+
+  keys = ['nombre', 'localidad', 'provincia', 'tiempoEstimado'];
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,17 +42,16 @@ export class ProyectoComponent implements OnInit {
     private alertController: AlertController,
     private uiService: UiService,
     private router: Router,
-    ) {
-      this.activatedRoute.params.subscribe(params => {
-        this.projectService.getProject(params.id).subscribe(({result}) => {
-          this.proyecto = result;
-          console.log('Proyecto', this.proyecto);
-          this.cargarDatos(this.proyecto);
-        });
-      });
-    }
+    ) {}
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.projectService.getProject(params.id).subscribe(({result}) => {
+        this.proyecto = result;
+        console.log('Proyecto', this.proyecto);
+        this.cargarDatos(this.proyecto);
+      });
+    });
   }
   handleChange() {
     this.checkedForm = !this.checkedForm;
@@ -66,29 +63,51 @@ export class ProyectoComponent implements OnInit {
 
   actualizar() {
     const datos = this.form.value;
-    this.projectService.update(datos);
+    this.uiService.cargando(true);
+    this.projectService.update(this.proyecto.id, datos)
+    .subscribe(({statusCode})=> {
+      this.uiService.cargando(false);
+      if (statusCode === 200){
+        this.uiService.toast('Proyecto actualizado correctamente.', 'success');
+        this.router.navigateByUrl(`/proyectos`);
+      }
+    },
+    error => {
+      console.log(error);
+      this.uiService.cargando(false);
+      this.uiService.toast('Hubo un error al actualizar. Intente nuevamente.', 'danger');
+
+    });
   }
 
   cargarDatos(datos) {
-    Object.keys(datos).map(x => {
+    this.keys.map(x => {
       this.setValue(x, datos[x]);
     });
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    };
-    console.log(new Date(datos.createdAt).toLocaleString());
-    this.codigoProyecto = datos.id;
-    this.date = new Date(datos.createdAt).toLocaleString();
-    this.setValue('createdAt', new Date(datos.createdAt));
   }
 
   eliminarProyecto() {
     console.log('Eliminado');
     this.presentAlert();
   }
+
+  eliminar() {
+    this.uiService.cargando(true);
+      this.projectService.deleteById(this.proyecto.id)
+      .subscribe(({statusCode})=> {
+        this.uiService.cargando(false);
+        if (statusCode === 200){
+          this.uiService.toast('Proyecto eliminado correctamente.', 'success');
+          this.router.navigateByUrl(`/proyectos`);
+        }
+      },
+      error => {
+        console.log(error);
+        this.uiService.cargando(false);
+        this.uiService.toast('Hubo un error al eliminar. Intente nuevamente.', 'danger');
+
+      });
+   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -104,8 +123,7 @@ export class ProyectoComponent implements OnInit {
           text: 'Confirmar',
           role: 'confirm',
           handler: () => {
-            this.uiService.toast('Proyecto borrado correctamente.', 'success');
-            this.router.navigateByUrl('/proyectos');
+            this.eliminar();
           },
         },
       ],
